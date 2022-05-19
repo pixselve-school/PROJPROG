@@ -14,7 +14,6 @@ public abstract class Portal extends Tile {
     public Portal(int map, int x, int y){
         super(false, x,y);
         tp = map;
-
     }
 
 }
