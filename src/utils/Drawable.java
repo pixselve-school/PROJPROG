@@ -13,7 +13,7 @@ public abstract class Drawable {
         position = new Position(0, 0);
     }
 
-    public Drawable(boolean solid, int x, int y) {
+    public Drawable(boolean solid, int x, int y, int width, int height) {
         isSolid = solid;
         position = new Position(x, y);
     }
