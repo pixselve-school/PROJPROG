@@ -16,5 +16,13 @@ public abstract class Tile extends Drawable {
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+		if (GamePanel.DEBUG) {
+			if (isSolid()) {
+				drawBoundings(g2, Color.RED);
+			} else {
+				drawBoundings(g2, Color.GREEN);
+			}
+
+		}
 	}
 }

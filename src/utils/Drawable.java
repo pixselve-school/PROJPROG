@@ -18,13 +18,26 @@ public abstract class Drawable {
   public Drawable(boolean solid, int x, int y, int width, int height) {
     isSolid = solid;
     position = new Position(x, y);
-    boundingBox = new Rectangle(new Position(x - width / 2, y - height / 2), new Position(x + width / 2, y + height / 2), new Position(x + width / 2, y - height / 2), new Position(x - width / 2, y + height / 2));
+    this.width = width;
+    this.height = height;
   }
 
   /**
    * The position on the map
    */
   private Position position;
+
+  private final int width;
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  private final int height;
 
   public Position getOldPosition() {
     return oldPosition;
@@ -48,10 +61,24 @@ public abstract class Drawable {
     this.position = position;
   }
 
-  private Rectangle boundingBox;
+  public void drawBoundings(Graphics g){
+    drawBoundings(g, Color.RED);
+  }
+
+  public void drawBoundings(Graphics g, Color color){
+    g.setColor(color);
+    g.drawRect(getPosition().getX(), getPosition().getY(), width, height);
+  }
+
+
+  private boolean isFill = false;
+
 
   public boolean isColliding(Drawable other) {
-    return boundingBox.collision(other.boundingBox);
+    return this.getPosition().getX() < other.getPosition().getX() + other.getWidth() &&
+        this.getPosition().getX() + this.getWidth() > other.getPosition().getX() &&
+        this.getPosition().getY() < other.getPosition().getY() + other.getHeight() &&
+        this.getPosition().getY() + this.getHeight() > other.getPosition().getY();
   }
 
   /**
