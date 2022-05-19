@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	Player player = new Player(this, keyH);
-	TileManager tileM = new TileManager(this);
+	TileManager tileM = new TileManager(this,1);
 		
 	// Constructeur de la classe
 	public GamePanel() {
@@ -62,6 +62,10 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			if (code == KeyEvent.VK_D) {
 				player.move(Direction.RIGHT);
+			}
+			if (code == KeyEvent.VK_M) {
+				tileM = new TileManager(this, 2);
+				System.out.println("Changement de map ??");
 			}
 			return null;
 		};
@@ -104,7 +108,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		tileM.draw(g2, this);
+		tileM.draw(g2);
 		player.draw(g2, this);
 		g2.dispose();
 	}

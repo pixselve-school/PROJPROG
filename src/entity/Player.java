@@ -59,7 +59,4 @@ public class Player extends Entity {
 			case RIGHT -> getPosition().addX( 1 * getSpeed());
 		}
 	}
-
-
-
 }

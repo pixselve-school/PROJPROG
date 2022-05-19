@@ -13,6 +13,11 @@ public abstract class Drawable {
         position = new Position(0, 0);
     }
 
+    public Drawable(boolean solid, int x, int y) {
+        isSolid = solid;
+        position = new Position(x, y);
+    }
+
     /**
      * The position on the map
      */
