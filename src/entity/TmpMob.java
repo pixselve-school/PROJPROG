@@ -2,7 +2,7 @@ package entity;
 
 import java.awt.*;
 
-public class TmpMob extends  Entity{
+public class TmpMob extends  Entity {
 
     public TmpMob(int health, int strength, int speed){
         super(health, strength, speed);

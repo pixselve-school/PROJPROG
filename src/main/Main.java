@@ -19,7 +19,7 @@ public class Main {
 		window.setResizable(false);
 		window.setTitle("Short Adventure");
 
-		Entity e = new TmpMob(10, 10, 10);
+		Entity e = new TmpMob(10, 1, 10);
 		Fight f = new EntityFight(e, window);
 
 		f.run();

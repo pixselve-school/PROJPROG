@@ -7,31 +7,31 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Drawable {
+    int m_health;
+    int m_strength;
+    int m_speed;
+
     public Entity(int health, int strength, int speed) {
-        this.health = health;
-        this.strength = strength;
-        this.speed = speed;
+        m_health = health;
+        m_strength = strength;
+        m_speed = speed;
     }
     public BufferedImage idleImage;
 
     public int getHealth() {
-        return health;
+        return m_health;
     }
 
     public int getStrength() {
-        return strength;
+        return m_strength;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setHealth(int damage) {
+        m_health = m_health - damage;
     }
 
-    private int health;
-    private int strength;
 
     public int getSpeed() {
-        return speed;
+        return m_speed;
     }
-
-    private int speed;
 }

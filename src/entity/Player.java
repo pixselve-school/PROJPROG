@@ -26,7 +26,7 @@ public class Player extends Entity {
     }
 
     public Player() {
-        super(100, 100, 10);
+        super(10, 5, 11);
         this.setPosition(new Position(0, 0));
     }
 

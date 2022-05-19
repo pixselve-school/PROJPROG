@@ -30,6 +30,10 @@ public class FightPanel extends JPanel implements Runnable{
     Entity m_opp;
     // FightBackground
     private BufferedImage background;
+
+    // Affichage du menu
+    public boolean menu;
+
     // Constructeur de la classe
     public FightPanel(Entity e) {
         m_opp = e;
@@ -42,6 +46,7 @@ public class FightPanel extends JPanel implements Runnable{
         } catch (IOException ex) {
             System.out.println("Background load failed !");
         }
+        menu = false;
     }
 
     public void startGameThread() {
@@ -90,6 +95,8 @@ public class FightPanel extends JPanel implements Runnable{
         // draw player
         g.setColor(Color.GREEN);
         g.fillRect(75, 400, 140, 200);
+
+
     }
 
 }
