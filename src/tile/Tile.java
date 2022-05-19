@@ -1,8 +1,16 @@
 package tile;
 
+import main.GamePanel;
+import utils.Drawable;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Tile {
-	public BufferedImage image;
-	public boolean collision = false;
+public abstract class Tile extends Drawable {
+	protected abstract BufferedImage getImage();
+
+	@Override
+	public void draw(Graphics2D g2, GamePanel gamePanel) {
+		g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), gamePanel.tileSize, gamePanel.tileSize, null);
+	}
 }
