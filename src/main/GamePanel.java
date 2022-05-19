@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
   public static ArrayList<Environment> environments;
   public static Scene currentEnvironment;
+  private static Scene oldScene;
 
   // Constructeur de la classe
   public GamePanel() {
@@ -45,12 +46,26 @@ public class GamePanel extends JPanel implements Runnable {
     environments.add(new Environment("/maps/map5.txt"));
     environments.add(new Environment("/maps/map6.txt"));
     currentEnvironment = environments.get(0);
+    oldScene = environments.get(0);
   }
 
   public void startGameThread() {
     gameThread = new Thread(this);
     gameThread.start();
   }
+
+
+  private static void setScene(Scene scene) {
+    oldScene.reset();
+    oldScene = currentEnvironment;
+    currentEnvironment = scene;
+  }
+
+  private static void revertScene() {
+    currentEnvironment.reset();
+    currentEnvironment = oldScene;
+  }
+
 
   public void run() {
 
@@ -70,6 +85,14 @@ public class GamePanel extends JPanel implements Runnable {
       }
       if (code == KeyEvent.VK_D) {
         player.addDirection(Direction.RIGHT);
+      }
+      if (code == KeyEvent.VK_F) {
+        if (currentEnvironment instanceof FightPanel) {
+          revertScene();
+        } else {
+          setScene(new FightPanel(new Player()));
+
+        }
       }
       return null;
     };
@@ -128,7 +151,10 @@ public class GamePanel extends JPanel implements Runnable {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
     currentEnvironment.draw(g2);
-    player.draw(g2);
+    if (!(currentEnvironment instanceof FightPanel)) {
+//      Do not draw the player when in fight mode
+      player.draw(g2);
+    }
     g2.dispose();
   }
 
