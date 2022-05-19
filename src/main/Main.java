@@ -1,11 +1,8 @@
 package main;
 
-import entity.Entity;
-import entity.Player;
-import fight.EntityFight;
-import fight.Fight;
-
 import javax.swing.JFrame;
+
+
 
 public class Main {
 
@@ -15,12 +12,14 @@ public class Main {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.setTitle("Short Adventure");
-
-		Entity e = new Entity();
-		//Player p = new Player();
-
-		//Fight f = new EntityFight(p,e , window);
-
+		
+		GamePanel gamePanel = new GamePanel();
+		window.add(gamePanel);
+		window.pack();
+		
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
+		gamePanel.startGameThread();
 
 	}
 

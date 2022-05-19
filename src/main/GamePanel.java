@@ -4,29 +4,31 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.JPanel;
 
+import entity.Direction;
 import entity.Player;
 import tile.TileManager;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
-public class GamePanel extends JPanel implements Runnable{
-	//Paramètres de l'écran
-	final int originalTileSize = 16; // une tuile de taille 16x16
-	final int scale = 3; // échelle utilisée pour agrandir l'affichage
-	public final int tileSize = originalTileSize * scale; // 48x48
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12; // ces valeurs donnent une résolution 4:3
-	public final int screenWidth = tileSize * maxScreenCol; //768 pixels
-	public final int screenHeight = tileSize * maxScreenRow; //576 pixels
-	
+public class GamePanel extends JPanel implements Runnable {
+	//Paramï¿½tres de l'ï¿½cran
+	final static int originalTileSize = 16; // une tuile de taille 16x16
+	final static int scale = 3; // ï¿½chelle utilisï¿½e pour agrandir l'affichage
+	public static final int tileSize = originalTileSize * scale; // 48x48
+	public static final int maxScreenCol = 16;
+	public static final int maxScreenRow = 12; // ces valeurs donnent une rï¿½solution 4:3
+	public static final int screenWidth = tileSize * maxScreenCol; //768 pixels
+	public static final int screenHeight = tileSize * maxScreenRow; //576 pixels
+
 	// FPS : taux de rafraichissement
-	int FPS = 60;
-	// Création des différentes instances (Player, KeyHandler, TileManager, GameThread ...)
-	KeyHandler keyH = new KeyHandler();
-	Thread gameThread;
-	Player player = new Player(this, keyH);
-	TileManager tileM = new TileManager(this);
+	static int FPS = 60;
+	// Crï¿½ation des diffï¿½rentes instances (Player, KeyHandler, TileManager, GameThread ...)
+	static KeyHandler keyH = new KeyHandler();
+	static Thread gameThread;
+	static Player player = new Player();
+	TileManager tileM = new TileManager(this,1);
 		
 	// Constructeur de la classe
 	public GamePanel() {
@@ -47,13 +49,34 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
 		double nextDrawTime = System.nanoTime() + drawInterval; 
-		
+
+		keyH.onKeyPress = (Integer code) -> {
+			if (code == KeyEvent.VK_Z) {
+				player.move(Direction.UP);
+			}
+			if (code == KeyEvent.VK_S) {
+				player.move(Direction.DOWN);
+			}
+			if (code == KeyEvent.VK_Q) {
+				player.move(Direction.LEFT);
+			}
+			if (code == KeyEvent.VK_D) {
+				player.move(Direction.RIGHT);
+			}
+			if (code == KeyEvent.VK_M) {
+				tileM = new TileManager(this, 2);
+				System.out.println("Changement de map ??");
+			}
+			return null;
+		};
+
+
 		while(gameThread != null) { //Tant que le thread du jeu est actif
 			
 			
-			//Permet de mettre à jour les différentes variables du jeu
+			//Permet de mettre Ã  jour les diffÃ©rentes variables du jeu
 			update();
-			//Dessine sur l'écran le personnage et la map avec les nouvelles informations. la méthode "paintComponent" doit obligatoirement être appelée avec "repaint()"
+			//Dessine sur l'ï¿½cran le personnage et la map avec les nouvelles informations. la mï¿½thode "paintComponent" doit obligatoirement ï¿½tre appelï¿½e avec "repaint()"
 			repaint();
 			//Calcule le temps de pause du thread
 			
