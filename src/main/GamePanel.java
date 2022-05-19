@@ -6,11 +6,12 @@ import javax.swing.JPanel;
 
 import entity.Direction;
 import entity.Player;
-import tile.TileManager;
+import utils.Environment;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
 	//Param�tres de l'�cran
@@ -28,7 +29,9 @@ public class GamePanel extends JPanel implements Runnable {
 	static KeyHandler keyH = new KeyHandler();
 	static Thread gameThread;
 	static Player player = new Player();
-	TileManager tileM = new TileManager(this,1);
+
+	static ArrayList<Environment> environments;
+	static Environment currentEnvironment;
 		
 	// Constructeur de la classe
 	public GamePanel() {
@@ -37,6 +40,14 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		environments = new ArrayList<>();
+		environments.add(new Environment("/maps/map1.txt"));
+		environments.add(new Environment("/maps/map2.txt"));
+		environments.add(new Environment("/maps/map3.txt"));
+		environments.add(new Environment("/maps/map4.txt"));
+		environments.add(new Environment("/maps/map5.txt"));
+		environments.add(new Environment("/maps/map6.txt"));
+		currentEnvironment = environments.get(0);
 	}
 	
 	public void startGameThread() {
@@ -64,8 +75,6 @@ public class GamePanel extends JPanel implements Runnable {
 				player.move(Direction.RIGHT);
 			}
 			if (code == KeyEvent.VK_M) {
-				tileM = new TileManager(this, 2);
-				System.out.println("Changement de map ??");
 			}
 			return null;
 		};
@@ -108,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		tileM.draw(g2);
+		currentEnvironment.draw(g2);
 		player.draw(g2);
 		g2.dispose();
 	}
