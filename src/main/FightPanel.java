@@ -1,7 +1,6 @@
 package main;
 
-import entity.Player;
-import tile.TileManager;
+import entity.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,7 @@ import javax.imageio.*;
 import java.io.*;
 
 
-public class CombatPanel extends JPanel implements Runnable{
+public class FightPanel extends JPanel implements Runnable{
     //Paramètres de l'écran
     final int originalTileSize = 16; // une tuile de taille 16x16
     final int scale = 3; // échelle utilisée pour agrandir l'affichage
@@ -27,12 +26,14 @@ public class CombatPanel extends JPanel implements Runnable{
     Thread combatThread;
     //TileManager tileM = new TileManager(this);
 
+    // opponent
+    Entity m_opp;
     // FightBackground
     private BufferedImage background;
     // Constructeur de la classe
-    public CombatPanel() {
+    public FightPanel(Entity e) {
+        m_opp = e;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -81,11 +82,10 @@ public class CombatPanel extends JPanel implements Runnable{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // draw the background
-        g.drawImage(background, 0, 0, this);
+        g.drawImage(background, 0, 0, null);
 
         // draw opponent
-        g.setColor(Color.YELLOW);
-        g.fillRect(430, 200, 70, 100);
+        m_opp.draw((Graphics2D) g);
 
         // draw player
         g.setColor(Color.GREEN);

@@ -2,7 +2,8 @@ package fight;
 
 import entity.Entity;
 import entity.Player;
-import main.CombatPanel;
+import entity.TmpMob;
+import main.FightPanel;
 
 import javax.swing.*;
 
@@ -17,22 +18,22 @@ public abstract class Fight {
 
     // Acses to combat panel
     JFrame m_window;
-    CombatPanel m_panel;
+    FightPanel m_panel;
 
 
     /*--------------------- Methods ----------------------*/
     /**
      * Entity Fight constructor
-     * @param p Human player
      * @param e Opponent entity
+     * @param window JFrame
      */
-    public Fight(Player p, Entity e, JFrame window) {
+    public Fight(Entity e, JFrame window) {
         m_opponent = e;
-        m_player = p;
+        m_player = new Player();
         m_end = false;
         m_window = window;
 
-        m_panel = new CombatPanel();
+        m_panel = new FightPanel(m_opponent);
         m_window.add(m_panel);
         window.pack();
 
@@ -51,6 +52,7 @@ public abstract class Fight {
             // Check the fastest to act
             if(m_player.getSpeed()> m_opponent.getSpeed()) {
                 // Player turn
+                System.out.println("Player turn");
                 playerTurn();
                 // Check if player kills opponent
                 if(m_opponent.getHealth()==0) {
@@ -59,6 +61,7 @@ public abstract class Fight {
                 }
 
                 // Opponent turn
+                System.out.println("Opponent turn");
                 opponentTurn();
                 // Check if opponent kills player
                 if(m_player.getHealth()==0) {
@@ -68,6 +71,7 @@ public abstract class Fight {
             }
             else {
                 // Opponent turn
+                System.out.println("Opponent turn");
                 opponentTurn();
                 // Check if opponent kills player
                 if(m_player.getHealth()==0) {
@@ -76,6 +80,7 @@ public abstract class Fight {
                 }
 
                 // Player turn
+                System.out.println("Player turn");
                 playerTurn();
                 // Check if player kills opponent
                 if(m_opponent.getHealth()==0) {
