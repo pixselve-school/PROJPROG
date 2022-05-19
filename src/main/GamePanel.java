@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-import entity.Direction;
 import entity.Player;
 import tile.TileManager;
 
@@ -47,29 +46,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public void run() {
 		
 		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
-		double nextDrawTime = System.nanoTime() + drawInterval;
-
-		keyH.onKeyPress = (Integer keyCode) -> {
-			System.out.println(keyCode);
-			if (keyCode == 90) {
-				player.move(Direction.UP);
-			}
-			if (keyCode == 83) {
-				player.move(Direction.DOWN);
-			}
-			if (keyCode == 81) {
-				player.move(Direction.LEFT);
-			}
-			if (keyCode == 68) {
-				player.move(Direction.RIGHT);
-			}
-			return null;
-		};
+		double nextDrawTime = System.nanoTime() + drawInterval; 
 		
 		while(gameThread != null) { //Tant que le thread du jeu est actif
 			
 			
-			//Permet de mettre � jour les diff�rentes variables du jeu
+			//Permet de mettre à jour les différentes variables du jeu
 			update();
 			//Dessine sur l'�cran le personnage et la map avec les nouvelles informations. la m�thode "paintComponent" doit obligatoirement �tre appel�e avec "repaint()"
 			repaint();
