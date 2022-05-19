@@ -54,34 +54,7 @@ public class TileManager {
 
 	//Mise à jour de la map
 	public void updateMap(int id){
-		//charger le fichier txt de la map
-		try {
 
-			InputStream is = getClass().getResourceAsStream("/maps/map"+id+".txt");
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-			int col = 0;
-			int row = 0;
-			// Parcourir le fichier txt pour r�cup�rer les valeurs
-			while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
-				String line = br.readLine();
-				while (col < gp.maxScreenCol) {
-					String numbers[] = line.split(" ");
-					int num = Integer.parseInt(numbers[col]);
-					mapTileNum [col][row] = num;
-					col++;
-				}
-				if (col == gp.maxScreenCol) {
-					col = 0;
-					row ++;
-				}
-
-			}
-
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 
