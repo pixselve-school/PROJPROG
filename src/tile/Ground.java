@@ -8,19 +8,19 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Wall extends Tile {
+public class Ground extends Tile {
     private static final BufferedImage image;
 
     static {
         try {
-            image = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/BRICK2.png")));
+            image = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/GRASS.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Wall(int x, int y){
-        super(true, x, y);
+    public Ground(int x, int y){
+        super(false, x, y);
     }
 
     @Override
