@@ -2,9 +2,16 @@ package fight;
 
 import entity.Entity;
 import entity.Player;
-import main.CombatPanel;
+import entity.TmpMob;
+import main.FightPanel;
+
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import utils.Music;
 
 public abstract class Fight {
     /*-------------------- Attributes --------------------*/
@@ -16,23 +23,29 @@ public abstract class Fight {
     private boolean m_end;
 
     // Acses to combat panel
-    JFrame m_window;
-    CombatPanel m_panel;
+    private JFrame m_window;
+    private FightPanel m_panel;
+
+    Music m_music;
 
 
     /*--------------------- Methods ----------------------*/
     /**
      * Entity Fight constructor
-     * @param p Human player
      * @param e Opponent entity
+     * @param window JFrame
      */
-    public Fight(Player p, Entity e, JFrame window) {
+    public Fight(Entity e, JFrame window) {
         m_opponent = e;
-        m_player = p;
+        m_player = new Player();
+
         m_end = false;
         m_window = window;
 
-        m_panel = new CombatPanel();
+        m_music = new Music("fight");
+        m_music.play();
+
+        m_panel = new FightPanel(m_opponent);
         m_window.add(m_panel);
         window.pack();
 
@@ -40,7 +53,7 @@ public abstract class Fight {
         window.setVisible(true);
         m_panel.startGameThread();
 
-        System.out.println("combat lancé");
+        System.out.println("START : Player Health : " + m_player.getHealth() + " | Opponent Health : " + m_opponent.getHealth());
     }
 
     /**
@@ -48,6 +61,7 @@ public abstract class Fight {
      */
     public void run(){
         while(!m_end) {
+            System.out.println("Player Health : " + m_player.getHealth() + " | Opponent Health : " + m_opponent.getHealth());
             // Check the fastest to act
             if(m_player.getSpeed()> m_opponent.getSpeed()) {
                 // Player turn
@@ -84,23 +98,26 @@ public abstract class Fight {
                 }
             }
         }
+        System.out.println("END : Player Health : " + m_player.getHealth() + " | Opponent Health : " + m_opponent.getHealth());
     }
 
     /**
      *
      */
     private void opponentTurn() {
-
+        m_player.setHealth(m_opponent.getStrength());
     }
 
     private void playerTurn() {
+        m_opponent.setHealth(m_player.getStrength());
+        /*
         int action = selectAction();
         if(action==1) {
             attack();
         }
         else if(action==2) {
             escape();
-        }
+        }*/
     }
 
     /**
@@ -111,9 +128,11 @@ public abstract class Fight {
     }
 
     private int selectAction(){
+        //m_panel
 
-        return 1;
+        return 2;
     }
 
     private void attack(){}
+
 }
