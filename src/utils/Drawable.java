@@ -1,13 +1,21 @@
 package utils;
 
-import main.GamePanel;
-
 import java.awt.*;
 
 /**
  * Class that represents a drawable thing
  */
 public abstract class Drawable {
+  private final int width;
+  private final int height;
+  private final boolean isSolid;
+  /**
+   * The position on the map
+   */
+  private Position position;
+  private Position oldPosition;
+  private final boolean isFill = false;
+
   /**
    * @param solid
    * @param x      the x position (center of the object)
@@ -22,13 +30,6 @@ public abstract class Drawable {
     this.height = height;
   }
 
-  /**
-   * The position on the map
-   */
-  private Position position;
-
-  private final int width;
-
   public int getWidth() {
     return width;
   }
@@ -37,20 +38,13 @@ public abstract class Drawable {
     return height;
   }
 
-  private final int height;
-
   public Position getOldPosition() {
     return oldPosition;
   }
 
-  private Position oldPosition;
-
-
   public boolean isSolid() {
     return isSolid;
   }
-
-  private final boolean isSolid;
 
   public Position getPosition() {
     return position;
@@ -61,18 +55,14 @@ public abstract class Drawable {
     this.position = position;
   }
 
-  public void drawBoundings(Graphics g){
+  public void drawBoundings(Graphics g) {
     drawBoundings(g, Color.RED);
   }
 
-  public void drawBoundings(Graphics g, Color color){
+  public void drawBoundings(Graphics g, Color color) {
     g.setColor(color);
     g.drawRect(getPosition().getX(), getPosition().getY(), width, height);
   }
-
-
-  private boolean isFill = false;
-
 
   public boolean isColliding(Drawable other) {
     return this.getPosition().getX() < other.getPosition().getX() + other.getWidth() &&

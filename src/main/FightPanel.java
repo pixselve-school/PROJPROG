@@ -2,101 +2,98 @@ package main;
 
 import entity.Entity;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
-import javax.imageio.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
-public class FightPanel extends JPanel implements Runnable{
-    //Paramètres de l'écran
-    final int originalTileSize = 16; // une tuile de taille 16x16
-    final int scale = 3; // échelle utilisée pour agrandir l'affichage
-    public final int tileSize = originalTileSize * scale; // 48x48
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12; // ces valeurs donnent une résolution 4:3
-    public final int screenWidth = tileSize * maxScreenCol; //768 pixels
-    public final int screenHeight = tileSize * maxScreenRow; //576 pixels
+public class FightPanel extends JPanel implements Runnable {
+  public final int maxScreenCol = 16;
+  public final int maxScreenRow = 12; // ces valeurs donnent une résolution 4:3
+  //Paramètres de l'écran
+  final int originalTileSize = 16; // une tuile de taille 16x16
+  final int scale = 3; // échelle utilisée pour agrandir l'affichage
+  public final int tileSize = originalTileSize * scale; // 48x48
+  public final int screenWidth = tileSize * maxScreenCol; //768 pixels
+  public final int screenHeight = tileSize * maxScreenRow; //576 pixels
+  // Affichage du menu
+  public boolean menu;
+  // FPS : taux de rafraichissement
+  int FPS = 60;
+  // Création des différentes instances (Player, KeyHandler, TileManager, GameThread ...)
+  KeyHandler keyH = new KeyHandler();
+  //TileManager tileM = new TileManager(this);
+  Thread combatThread;
+  // opponent
+  Entity m_opp;
+  // FightBackground
+  private BufferedImage background;
 
-    // FPS : taux de rafraichissement
-    int FPS = 60;
-    // Création des différentes instances (Player, KeyHandler, TileManager, GameThread ...)
-    KeyHandler keyH = new KeyHandler();
-    Thread combatThread;
-    //TileManager tileM = new TileManager(this);
+  // Constructeur de la classe
+  public FightPanel(Entity e) {
+    m_opp = e;
+    this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+    this.setDoubleBuffered(true);
+    this.addKeyListener(keyH);
+    this.setFocusable(true);
+    try {
+      background = ImageIO.read(getClass().getResource("/Backgrounds/Fight_back.png"));
+    } catch (IOException ex) {
+      System.out.println("Background load failed !");
+    }
+    menu = false;
+  }
 
-    // opponent
-    Entity m_opp;
-    // FightBackground
-    private BufferedImage background;
+  public void startGameThread() {
+    combatThread = new Thread(this);
+    combatThread.start();
+  }
 
-    // Affichage du menu
-    public boolean menu;
 
-    // Constructeur de la classe
-    public FightPanel(Entity e) {
-        m_opp = e;
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setDoubleBuffered(true);
-        this.addKeyListener(keyH);
-        this.setFocusable(true);
-        try {
-            background = ImageIO.read(getClass().getResource("/Backgrounds/Fight_back.png"));
-        } catch (IOException ex) {
-            System.out.println("Background load failed !");
+  public void run() {
+
+    double drawInterval = 1000000000 / FPS; // rafraichissement chaque 0.0166666 secondes
+    double nextDrawTime = System.nanoTime() + drawInterval;
+
+    while (combatThread != null) { //Tant que le thread du jeu est actif
+
+
+      //Calcule le temps de pause du thread
+      repaint();
+
+      try {
+        double remainingTime = nextDrawTime - System.nanoTime();
+        remainingTime = remainingTime / 1000000;
+
+        if (remainingTime < 0) {
+          remainingTime = 0;
         }
-        menu = false;
+
+        Thread.sleep((long) remainingTime);
+        nextDrawTime += drawInterval;
+
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
+  }
 
-    public void startGameThread() {
-        combatThread = new Thread(this);
-        combatThread.start();
-    }
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    // draw the background
+    g.drawImage(background, 0, 0, null);
 
+    // draw opponent
+    m_opp.draw((Graphics2D) g);
 
-    public void run() {
-
-        double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
-        double nextDrawTime = System.nanoTime() + drawInterval;
-
-        while(combatThread != null) { //Tant que le thread du jeu est actif
-
-
-            //Calcule le temps de pause du thread
-            repaint();
-
-            try {
-                double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000;
-
-                if(remainingTime < 0) {
-                    remainingTime = 0;
-                }
-
-                Thread.sleep((long)remainingTime);
-                nextDrawTime += drawInterval;
-
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
-
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // draw the background
-        g.drawImage(background, 0, 0, null);
-
-        // draw opponent
-        m_opp.draw((Graphics2D) g);
-
-        // draw player
-        g.setColor(Color.GREEN);
-        g.fillRect(75, 400, 140, 200);
+    // draw player
+    g.setColor(Color.GREEN);
+    g.fillRect(75, 400, 140, 200);
 
 
-    }
+  }
 
 }

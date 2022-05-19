@@ -1,37 +1,30 @@
 package main;
 
-import java.awt.Dimension;
-import java.awt.Color;
-import javax.swing.JPanel;
-
 import entity.Direction;
 import entity.Player;
 import utils.Environment;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
+  public static final int maxScreenCol = 16;
+  public static final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
+  public static final boolean DEBUG = false;
   //Param�tres de l'�cran
   final static int originalTileSize = 16; // une tuile de taille 16x16
   final static int scale = 3; // �chelle utilis�e pour agrandir l'affichage
   public static final int tileSize = originalTileSize * scale; // 48x48
-  public static final int maxScreenCol = 16;
-  public static final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
   public static final int screenWidth = tileSize * maxScreenCol; //768 pixels
   public static final int screenHeight = tileSize * maxScreenRow; //576 pixels
-
-  public static final boolean DEBUG = false;
-
-  // FPS : taux de rafraichissement
-  static int FPS = 60;
   // Cr�ation des diff�rentes instances (Player, KeyHandler, TileManager, GameThread ...)
   public static KeyHandler keyH = new KeyHandler();
-  static Thread gameThread;
   public static Player player = new Player();
-
+  // FPS : taux de rafraichissement
+  static int FPS = 60;
+  static Thread gameThread;
   static ArrayList<Environment> environments;
   static Environment currentEnvironment;
 

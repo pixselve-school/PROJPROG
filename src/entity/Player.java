@@ -1,94 +1,88 @@
 package entity;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.imageio.ImageIO;
-
 import main.GamePanel;
-import main.KeyHandler;
 import utils.Drawable;
 import utils.Position;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Objects;
+
 public class Player extends Entity {
 
-    private static final BufferedImage image;
+  private static final BufferedImage image;
 
-    static {
-        try {
-            image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/player/superhero.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+  static {
+    try {
+      image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/player/superhero.png")));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public Player() {
-        super(100, 100, 5);
-        this.nextPosition = this.getPosition();
-        this.directions = new HashSet<>();
+  public Position nextPosition;
+  private final HashSet<Direction> directions;
+
+  public Player() {
+    super(100, 100, 5);
+    this.nextPosition = this.getPosition();
+    this.directions = new HashSet<>();
+  }
+
+  public void update() {
+    computeNextPosition();
+  }
+
+  public void addDirection(Direction direction) {
+    this.directions.add(direction);
+  }
+
+  public void removeDirection(Direction direction) {
+    this.directions.remove(direction);
+  }
+
+  public void computeNextPosition() {
+    nextPosition = this.getPosition();
+    if (this.directions.contains(Direction.UP)) {
+      nextPosition = new Position(nextPosition.getX(), nextPosition.getY() - this.getSpeed());
     }
-
-    public void update() {
-        computeNextPosition();
+    if (this.directions.contains(Direction.DOWN)) {
+      nextPosition = new Position(nextPosition.getX(), nextPosition.getY() + this.getSpeed());
     }
-
-    public Position nextPosition;
-
-    private HashSet<Direction> directions;
-
-    public void addDirection(Direction direction) {
-        this.directions.add(direction);
+    if (this.directions.contains(Direction.LEFT)) {
+      nextPosition = new Position(nextPosition.getX() - this.getSpeed(), nextPosition.getY());
     }
-    public void removeDirection(Direction direction) {
-        this.directions.remove(direction);
+    if (this.directions.contains(Direction.RIGHT)) {
+      nextPosition = new Position(nextPosition.getX() + this.getSpeed(), nextPosition.getY());
     }
+  }
 
-    public void computeNextPosition() {
-        nextPosition = this.getPosition();
-        if (this.directions.contains(Direction.UP)) {
-            nextPosition = new Position(nextPosition.getX(), nextPosition.getY() - this.getSpeed());
-        }
-        if (this.directions.contains(Direction.DOWN)) {
-            nextPosition = new Position(nextPosition.getX(), nextPosition.getY() + this.getSpeed());
-        }
-        if (this.directions.contains(Direction.LEFT)) {
-            nextPosition = new Position(nextPosition.getX() - this.getSpeed(), nextPosition.getY());
-        }
-        if (this.directions.contains(Direction.RIGHT)) {
-            nextPosition = new Position(nextPosition.getX() + this.getSpeed(), nextPosition.getY());
-        }
-    }
-
-    public boolean collideNextBoundingBox(Drawable other) {
-        int width = getWidth();
-        int height = getHeight();
-        int otherWidth = other.getWidth();
-        int otherHeight = other.getHeight();
-        int x = nextPosition.getX();
-        int y = nextPosition.getY();
-        int otherX = other.getPosition().getX();
-        int otherY = other.getPosition().getY();
-        return x + width > otherX && x < otherX + otherWidth && y + height > otherY && y < otherY + otherHeight;
-    }
+  public boolean collideNextBoundingBox(Drawable other) {
+    int width = getWidth();
+    int height = getHeight();
+    int otherWidth = other.getWidth();
+    int otherHeight = other.getHeight();
+    int x = nextPosition.getX();
+    int y = nextPosition.getY();
+    int otherX = other.getPosition().getX();
+    int otherY = other.getPosition().getY();
+    return x + width > otherX && x < otherX + otherWidth && y + height > otherY && y < otherY + otherHeight;
+  }
 
 
-    public void draw(Graphics2D g2) {
-        // affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-        g2.drawImage(image, getPosition().getX(), getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
-        if (GamePanel.DEBUG) {
-            drawBoundings(g2, Color.BLUE);
-        }
+  public void draw(Graphics2D g2) {
+    // affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
+    g2.drawImage(image, getPosition().getX(), getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+    if (GamePanel.DEBUG) {
+      drawBoundings(g2, Color.BLUE);
     }
+  }
 
-    public void move() {
-        setPosition(nextPosition);
-        this.nextPosition = getPosition();
-    }
+  public void move() {
+    setPosition(nextPosition);
+    this.nextPosition = getPosition();
+  }
 }
