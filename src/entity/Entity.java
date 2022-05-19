@@ -1,5 +1,6 @@
 package entity;
 
+import main.GamePanel;
 import utils.Drawable;
 import utils.Position;
 
@@ -7,31 +8,32 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Drawable {
-    int m_health;
-    int m_strength;
-    int m_speed;
-
     public Entity(int health, int strength, int speed) {
-        m_health = health;
-        m_strength = strength;
-        m_speed = speed;
+        super(true, 150, 150, GamePanel.tileSize, GamePanel.tileSize);
+        this.health = health;
+        this.strength = strength;
+        this.speed = speed;
     }
     public BufferedImage idleImage;
 
     public int getHealth() {
-        return m_health;
+        return health;
     }
 
     public int getStrength() {
-        return m_strength;
+        return strength;
     }
 
-    public void setHealth(int damage) {
-        m_health = m_health - damage;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
+    private int health;
+    private int strength;
 
     public int getSpeed() {
-        return m_speed;
+        return speed;
     }
+
+    private int speed;
 }

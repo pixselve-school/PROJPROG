@@ -8,13 +8,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Portal extends Ground {
+public abstract class Portal extends Tile {
     private int tp;
 
-    public Portal(int map, int x, int y){
-        super(x,y);
-        tp = map;
 
+    public Portal(int map, int x, int y){
+        super(false, x,y);
+        tp = map;
     }
 
 }

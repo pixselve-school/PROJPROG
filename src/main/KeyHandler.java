@@ -8,6 +8,7 @@ import java.util.function.Function;
 
 public class KeyHandler implements KeyListener{
 	public Function<Integer, Void> onKeyPress = (Integer a) -> {return null;};
+	public Function<Integer, Void> onKeyReleased = (Integer a) -> {return null;};
 	@Override
 	public void keyTyped(KeyEvent e) {
 
@@ -22,6 +23,8 @@ public class KeyHandler implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		int code = e.getKeyCode();
+		onKeyReleased.apply(code);
 		
 	}
 
