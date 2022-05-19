@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a6bd983-3a0b-4a96-adff-39c46d9d7f9c" name="Changes" comment="fix: do not push idea">
-      <change afterPath="$PROJECT_DIR$/src/tile/Ground.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tile/Liquid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/Environment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/maps/map5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/maps/map5.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tile/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tile/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tile/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tile/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tile/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tile/Wall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Drawable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652953455822</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chore: gitignore">
+      <created>1652961837611</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652961837611</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +160,7 @@
     <MESSAGE value="chore: java" />
     <MESSAGE value="chore: config" />
     <MESSAGE value="fix: do not push idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: do not push idea" />
+    <MESSAGE value="chore: gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: gitignore" />
   </component>
 </project>

@@ -14,7 +14,7 @@ public abstract class Tile extends Drawable {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, GamePanel gamePanel) {
-		g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), gamePanel.tileSize, gamePanel.tileSize, null);
+	public void draw(Graphics2D g2) {
+		g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
 	}
 }
