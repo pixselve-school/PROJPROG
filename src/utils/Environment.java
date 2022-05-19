@@ -116,8 +116,9 @@ public class Environment {
           break;
         }
       } else if (tile instanceof Portal) {
-        if(willPlayerCollideWithDrawable(tile)){
-          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+        if (isPlayerCollidingWithDrawable(tile)) {
+          //        The player is on the portal
+
           if(player.getPosition().getX() < 100){
             player.setPosition(new Position(GamePanel.screenWidth - 100, player.getPosition().getY()));
           }
@@ -130,7 +131,12 @@ public class Environment {
           else if(player.getPosition().getY() > GamePanel.screenHeight - 100){
             player.setPosition(new Position(player.getPosition().getX(), 100));
           }
+          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+          return;
+
+
         }
+
       }
     }
     if (!doesCollide) {
