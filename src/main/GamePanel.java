@@ -13,109 +13,136 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel implements Runnable {
-	//Param�tres de l'�cran
-	final static int originalTileSize = 16; // une tuile de taille 16x16
-	final static int scale = 3; // �chelle utilis�e pour agrandir l'affichage
-	public static final int tileSize = originalTileSize * scale; // 48x48
-	public static final int maxScreenCol = 16;
-	public static final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
-	public static final int screenWidth = tileSize * maxScreenCol; //768 pixels
-	public static final int screenHeight = tileSize * maxScreenRow; //576 pixels
+  //Param�tres de l'�cran
+  final static int originalTileSize = 16; // une tuile de taille 16x16
+  final static int scale = 3; // �chelle utilis�e pour agrandir l'affichage
+  public static final int tileSize = originalTileSize * scale; // 48x48
+  public static final int maxScreenCol = 16;
+  public static final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
+  public static final int screenWidth = tileSize * maxScreenCol; //768 pixels
+  public static final int screenHeight = tileSize * maxScreenRow; //576 pixels
 
-	// FPS : taux de rafraichissement
-	static int FPS = 60;
-	// Cr�ation des diff�rentes instances (Player, KeyHandler, TileManager, GameThread ...)
-	static KeyHandler keyH = new KeyHandler();
-	static Thread gameThread;
-	static Player player = new Player();
-	TileManager tileM = new TileManager(this,1);
-		
-	// Constructeur de la classe
-	public GamePanel() {
-		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
-		this.setDoubleBuffered(true);
-		this.addKeyListener(keyH);
-		this.setFocusable(true);
-	}
-	
-	public void startGameThread() {
-		gameThread = new Thread(this);
-		gameThread.start();
-	}
-	
-	
-	public void run() {
-		
-		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
-		double nextDrawTime = System.nanoTime() + drawInterval; 
+  // FPS : taux de rafraichissement
+  static int FPS = 60;
+  // Cr�ation des diff�rentes instances (Player, KeyHandler, TileManager, GameThread ...)
+  static KeyHandler keyH = new KeyHandler();
+  static Thread gameThread;
+  static Player player = new Player();
+  TileManager tileM = new TileManager(this, 1);
 
-		keyH.onKeyPress = (Integer code) -> {
-			if (code == KeyEvent.VK_Z) {
-				player.move(Direction.UP);
-			}
-			if (code == KeyEvent.VK_S) {
-				player.move(Direction.DOWN);
-			}
-			if (code == KeyEvent.VK_Q) {
-				player.move(Direction.LEFT);
-			}
-			if (code == KeyEvent.VK_D) {
-				player.move(Direction.RIGHT);
-			}
-			if (code == KeyEvent.VK_M) {
-				tileM = new TileManager(this, 2);
-				System.out.println("Changement de map ??");
-			}
-			return null;
-		};
+  // Constructeur de la classe
+  public GamePanel() {
+    this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+    this.setBackground(Color.black);
+    this.setDoubleBuffered(true);
+    this.addKeyListener(keyH);
+    this.setFocusable(true);
+  }
+
+  public void startGameThread() {
+    gameThread = new Thread(this);
+    gameThread.start();
+  }
+
+  private boolean[] movements = new boolean[4];
+
+  public void run() {
+
+    double drawInterval = 1000000000 / FPS; // rafraichissement chaque 0.0166666 secondes
+    double nextDrawTime = System.nanoTime() + drawInterval;
+
+    keyH.onKeyPress = (Integer code) -> {
+      if (code == KeyEvent.VK_Z) {
+        movements[0] = true;
+      }
+      if (code == KeyEvent.VK_S) {
+        movements[1] = true;
+      }
+      if (code == KeyEvent.VK_Q) {
+        movements[2] = true;
+      }
+      if (code == KeyEvent.VK_D) {
+        movements[3] = true;
+      }
+      if (code == KeyEvent.VK_M) {
+        tileM = new TileManager(this, 2);
+        System.out.println("Changement de map ??");
+      }
+      return null;
+    };
+    keyH.onKeyReleased = (Integer code) -> {
+      if (code == KeyEvent.VK_Z) {
+        movements[0] = false;
+      }
+      if (code == KeyEvent.VK_S) {
+        movements[1] = false;
+      }
+      if (code == KeyEvent.VK_Q) {
+        movements[2] = false;
+      }
+      if (code == KeyEvent.VK_D) {
+        movements[3] = false;
+      }
+      return null;
+    };
 
 
-		while(gameThread != null) { //Tant que le thread du jeu est actif
-			
-			
-			//Permet de mettre à jour les différentes variables du jeu
-			update();
-			//Dessine sur l'�cran le personnage et la map avec les nouvelles informations. la m�thode "paintComponent" doit obligatoirement �tre appel�e avec "repaint()"
-			repaint();
-			//Calcule le temps de pause du thread
-			
-			
-			try {
-				double remainingTime = nextDrawTime - System.nanoTime();
-				remainingTime = remainingTime/1000000;
-				
-				if(remainingTime < 0) {
-					remainingTime = 0;
-				}
-				
-				Thread.sleep((long)remainingTime);
-				nextDrawTime += drawInterval;
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-	
+    while (gameThread != null) { //Tant que le thread du jeu est actif
 
-	
-	public void update() {
-		player.update();
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		tileM.draw(g2);
-		player.draw(g2);
-		g2.dispose();
-	}
-	
-	
+
+      //Permet de mettre à jour les différentes variables du jeu
+      update();
+      //Dessine sur l'�cran le personnage et la map avec les nouvelles informations. la m�thode "paintComponent" doit obligatoirement �tre appel�e avec "repaint()"
+      repaint();
+      //Calcule le temps de pause du thread
+
+
+      try {
+        double remainingTime = nextDrawTime - System.nanoTime();
+        remainingTime = remainingTime / 1000000;
+
+        if (remainingTime < 0) {
+          remainingTime = 0;
+        }
+
+        Thread.sleep((long) remainingTime);
+        nextDrawTime += drawInterval;
+
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+  public void update() {
+    player.update();
+    if (movements[0]) {
+      player.move(Direction.UP);
+    }
+    if (movements[1]) {
+      player.move(Direction.DOWN);
+    }
+    if (movements[2]) {
+      player.move(Direction.LEFT);
+    }
+    if (movements[3]) {
+      player.move(Direction.RIGHT);
+    }
+
+  }
+
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    Graphics2D g2 = (Graphics2D) g;
+    tileM.draw(g2);
+    player.draw(g2);
+    g2.dispose();
+  }
+
+
 }
-
 
 
 //public void run() {
