@@ -18,7 +18,7 @@ public class Player extends Entity {
 	KeyHandler keyH;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
-		super(100, 100, 20);
+		super(100, 100, 10);
 		this.setPosition(new Position(0, 0));
 		System.out.println(this.getPosition().getX());
 		this.gp = gp;
