@@ -33,12 +33,12 @@ public abstract class Fight {
         m_window = window;
 
         m_panel = new CombatPanel();
-        m_window.add(panel);
+        m_window.add(m_panel);
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        panel.startGameThread();
+        m_panel.startGameThread();
 
         System.out.println("combat lancé");
     }
