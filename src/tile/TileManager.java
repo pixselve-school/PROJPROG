@@ -84,18 +84,23 @@ public class TileManager {
 					int num = Integer.parseInt(numbers[col]);
 					mapTileType[col][row] = num;
 					int ts = gamePanel.tileSize;
-					switch (num){
-						case 0:
-							tiles.add(new Ground(col*ts,row*ts));
-							break;
-						case 1:
-							tiles.add(new Wall(col*ts,row*ts));
-							break;
-						case 2:
-							tiles.add(new Liquid(col*ts,row*ts));
-							break;
-						default:
-							tiles.add(new Ground(col*ts,row*ts));
+					if(num < 0){
+						tiles.add(new Portal(-num,col*ts,row*ts));
+					}
+					else {
+						switch (num) {
+							case 0:
+								tiles.add(new Ground(col * ts, row * ts));
+								break;
+							case 1:
+								tiles.add(new Wall(col * ts, row * ts));
+								break;
+							case 2:
+								tiles.add(new Liquid(col * ts, row * ts));
+								break;
+							default:
+								tiles.add(new Ground(col * ts, row * ts));
+						}
 					}
 					col++;
 				}
