@@ -149,7 +149,7 @@ public class TileManager {
 
 
 		for (Tile tile : tiles) {
-			tile.draw(g2, gamePanel);
+			tile.draw(g2);
 		}
 
 //		while (col < gp.maxScreenCol && row < gp.maxScreenRow) {

@@ -12,22 +12,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 	//Param�tres de l'�cran
-	final int originalTileSize = 16; // une tuile de taille 16x16
-	final int scale = 3; // �chelle utilis�e pour agrandir l'affichage
-	public final int tileSize = originalTileSize * scale; // 48x48
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
-	public final int screenWidth = tileSize * maxScreenCol; //768 pixels
-	public final int screenHeight = tileSize * maxScreenRow; //576 pixels
-	
+	final static int originalTileSize = 16; // une tuile de taille 16x16
+	final static int scale = 3; // �chelle utilis�e pour agrandir l'affichage
+	public static final int tileSize = originalTileSize * scale; // 48x48
+	public static final int maxScreenCol = 16;
+	public static final int maxScreenRow = 12; // ces valeurs donnent une r�solution 4:3
+	public static final int screenWidth = tileSize * maxScreenCol; //768 pixels
+	public static final int screenHeight = tileSize * maxScreenRow; //576 pixels
+
 	// FPS : taux de rafraichissement
-	int FPS = 60;
+	static int FPS = 60;
 	// Cr�ation des diff�rentes instances (Player, KeyHandler, TileManager, GameThread ...)
-	KeyHandler keyH = new KeyHandler();
-	Thread gameThread;
-	Player player = new Player(this, keyH);
+	static KeyHandler keyH = new KeyHandler();
+	static Thread gameThread;
+	static Player player = new Player();
 	TileManager tileM = new TileManager(this,1);
 		
 	// Constructeur de la classe
@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		tileM.draw(g2);
-		player.draw(g2, this);
+		player.draw(g2);
 		g2.dispose();
 	}
 	

@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
@@ -14,49 +15,35 @@ import utils.Position;
 
 public class Player extends Entity {
 
-	GamePanel gp;
-	KeyHandler keyH;
-	
-	public Player(GamePanel gp, KeyHandler keyH) {
-		super(100, 100, 10);
-		this.setPosition(new Position(0, 0));
-		System.out.println(this.getPosition().getX());
-		this.gp = gp;
-		this.keyH = keyH;
-		getPlayerImage();
+    private static final BufferedImage image;
 
-	}
+    static {
+        try {
+            image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/player/superhero.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public Player() {
+        super(100, 100, 10);
+        this.setPosition(new Position(0, 0));
+    }
 
-	public void getPlayerImage() {
-		try {
-			
-			idleImage = ImageIO.read(getClass().getResource("/player/superhero.png"));
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void update() {
-		
-		
-		
-	}
-	
-	public void draw(Graphics2D g2, GamePanel gamePanel) {
-		// r�cup�re l'image du joueur
-		BufferedImage image = idleImage;
-		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-		g2.drawImage(image, getPosition().getX(), getPosition().getY(), gp.tileSize, gp.tileSize, null);
-	}
+    public void update() {
+    }
 
-	public void move(Direction direction) {
-		switch (direction) {
-			case UP -> getPosition().addY( -1 * getSpeed());
-			case DOWN -> getPosition().addY( 1 * getSpeed());
-			case LEFT -> getPosition().addX( -1 * getSpeed());
-			case RIGHT -> getPosition().addX( 1 * getSpeed());
-		}
-	}
+    public void draw(Graphics2D g2) {
+        // affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
+        g2.drawImage(image, getPosition().getX(), getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+    }
+
+    public void move(Direction direction) {
+        switch (direction) {
+            case UP -> getPosition().addY(-1 * getSpeed());
+            case DOWN -> getPosition().addY(1 * getSpeed());
+            case LEFT -> getPosition().addX(-1 * getSpeed());
+            case RIGHT -> getPosition().addX(1 * getSpeed());
+        }
+    }
 }

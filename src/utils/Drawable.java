@@ -35,6 +35,6 @@ public abstract class Drawable {
     /**
      * Draw the thing
      */
-    public abstract void draw(Graphics2D g2, GamePanel gamePanel);
+    public abstract void draw(Graphics2D g2);
 
 }
