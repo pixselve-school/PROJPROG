@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.JPanel;
 
+import entity.Direction;
 import entity.Player;
 import tile.TileManager;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel implements Runnable{
 	//Param�tres de l'�cran
@@ -47,7 +49,24 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
 		double nextDrawTime = System.nanoTime() + drawInterval; 
-		
+
+		keyH.onKeyPress = (Integer code) -> {
+			if (code == KeyEvent.VK_Z) {
+				player.move(Direction.UP);
+			}
+			if (code == KeyEvent.VK_S) {
+				player.move(Direction.DOWN);
+			}
+			if (code == KeyEvent.VK_Q) {
+				player.move(Direction.LEFT);
+			}
+			if (code == KeyEvent.VK_D) {
+				player.move(Direction.RIGHT);
+			}
+			return null;
+		};
+
+
 		while(gameThread != null) { //Tant que le thread du jeu est actif
 			
 			
