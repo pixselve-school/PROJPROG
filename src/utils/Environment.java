@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
-public class Environment {
+public class Environment extends Scene {
   static int nbEnv = 0;
   private final LinkedList<Tile> tiles;
   private final LinkedList<Entity> entities;

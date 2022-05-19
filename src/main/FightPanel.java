@@ -1,6 +1,9 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
+import utils.Music;
+import utils.Scene;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,35 +12,28 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
-public class FightPanel extends JPanel implements Runnable {
-  public final int maxScreenCol = 16;
-  public final int maxScreenRow = 12; // ces valeurs donnent une résolution 4:3
-  //Paramètres de l'écran
-  final int originalTileSize = 16; // une tuile de taille 16x16
-  final int scale = 3; // échelle utilisée pour agrandir l'affichage
-  public final int tileSize = originalTileSize * scale; // 48x48
-  public final int screenWidth = tileSize * maxScreenCol; //768 pixels
-  public final int screenHeight = tileSize * maxScreenRow; //576 pixels
+public class FightPanel extends Scene {
   // Affichage du menu
   public boolean menu;
-  // FPS : taux de rafraichissement
-  int FPS = 60;
-  // Création des différentes instances (Player, KeyHandler, TileManager, GameThread ...)
-  KeyHandler keyH = new KeyHandler();
-  //TileManager tileM = new TileManager(this);
-  Thread combatThread;
   // opponent
   Entity m_opp;
   // FightBackground
   private BufferedImage background;
 
+  private boolean m_end;
+
   // Constructeur de la classe
   public FightPanel(Entity e) {
+    super("fight");
     m_opp = e;
-    this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-    this.setDoubleBuffered(true);
-    this.addKeyListener(keyH);
-    this.setFocusable(true);
+
+    m_end = false;
+
+    playMusic();
+
+    System.out.println("START : Player Health : " + GamePanel.player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
+
+
     try {
       background = ImageIO.read(getClass().getResource("/Backgrounds/Fight_back.png"));
     } catch (IOException ex) {
@@ -46,54 +42,106 @@ public class FightPanel extends JPanel implements Runnable {
     menu = false;
   }
 
-  public void startGameThread() {
-    combatThread = new Thread(this);
-    combatThread.start();
+
+
+
+  /**
+   *
+   */
+  private void opponentTurn() {
+    GamePanel.player.setHealth(m_opp.getStrength());
   }
 
+  private void playerTurn() {
+    m_opp.setHealth(GamePanel.player.getStrength());
+        /*
+        int action = selectAction();
+        if(action==1) {
+            attack();
+        }
+        else if(action==2) {
+            escape();
+        }*/
+  }
 
-  public void run() {
+  /**
+   * Quit fight
+   */
+  private void escape() {
+    m_end = true;
+  }
 
-    double drawInterval = 1000000000 / FPS; // rafraichissement chaque 0.0166666 secondes
-    double nextDrawTime = System.nanoTime() + drawInterval;
+  private int selectAction() {
+    //m_panel
 
-    while (combatThread != null) { //Tant que le thread du jeu est actif
+    return 2;
+  }
 
+  private void attack() {
+  }
 
-      //Calcule le temps de pause du thread
-      repaint();
+  /**
+   * Update the scene
+   * @param player the player
+   */
+  @Override
+  public void update(Player player) {
 
-      try {
-        double remainingTime = nextDrawTime - System.nanoTime();
-        remainingTime = remainingTime / 1000000;
-
-        if (remainingTime < 0) {
-          remainingTime = 0;
+//      System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
+      // Check the fastest to act
+      if (player.getSpeed() > m_opp.getSpeed()) {
+        // Player turn
+        playerTurn();
+        // Check if player kills opponent
+        if (m_opp.getHealth() == 0) {
+          m_end = true;
+//          break;
         }
 
-        Thread.sleep((long) remainingTime);
-        nextDrawTime += drawInterval;
+        // Opponent turn
+        opponentTurn();
+        // Check if opponent kills player
+        if (player.getHealth() == 0) {
+          m_end = true;
+//          break;
+        }
+      } else {
+        // Opponent turn
+        opponentTurn();
+        // Check if opponent kills player
+        if (player.getHealth() == 0) {
+          m_end = true;
+//          break;
+        }
 
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        // Player turn
+        playerTurn();
+        // Check if player kills opponent
+        if (m_opp.getHealth() == 0) {
+          m_end = true;
+//          break;
+        }
       }
-    }
+
+    System.out.println("END : Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
   }
 
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
+  /**
+   * Draw the scene
+   * @param g2 the graphics
+   */
+  @Override
+  public void draw(Graphics2D g2) {
     // draw the background
-    g.drawImage(background, 0, 0, null);
+    g2.drawImage(background, 0, 0, null);
 
     // draw opponent
-    m_opp.draw((Graphics2D) g);
+    m_opp.draw(g2);
 
     // draw player
-    g.setColor(Color.GREEN);
-    g.fillRect(75, 400, 140, 200);
+    g2.setColor(Color.GREEN);
+    g2.fillRect(75, 400, 140, 200);
 
 
   }
-
 }
