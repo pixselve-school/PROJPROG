@@ -52,7 +52,19 @@ public class Environment {
                     int num = Integer.parseInt(numbers[col]);
                     int ts = GamePanel.tileSize;
                     if(num < 0){
-                        tiles.add(new Portal(-num,col*ts,row*ts));
+                        System.out.println(col + " " + row);
+                        if(col == 7){
+                            tiles.add(new Portal_left(-num,col*ts,row*ts));
+                        }
+                        else if (col == 8){
+                            tiles.add(new Portal_right(-num,col*ts,row*ts));
+                        }
+                        else if(row == 5){
+                            tiles.add(new Portal_sideUp(-num,col*ts,row*ts));
+                        }
+                        else if (row == 6){
+                            tiles.add(new Portal_sideDown(-num,col*ts,row*ts));
+                        }
                     }
                     else {
                         switch (num) {

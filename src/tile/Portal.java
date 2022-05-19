@@ -11,6 +11,7 @@ import java.util.Objects;
 public abstract class Portal extends Tile {
     private int tp;
 
+
     public Portal(int map, int x, int y){
         super(false, x,y);
         tp = map;
