@@ -49,9 +49,6 @@ public class Environment {
                 String line = br.readLine();
                 while (col < GamePanel.maxScreenCol) {
                     String numbers[] = line.split(" ");
-                    for(String s : numbers){
-                        System.out.println(s);
-                    }
                     int num = Integer.parseInt(numbers[col]);
                     int ts = GamePanel.tileSize;
                     if(num < 0){
