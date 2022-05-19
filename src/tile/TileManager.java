@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 import main.GamePanel;
 
@@ -27,7 +26,7 @@ public class TileManager {
 	}
 	
 	public void getTileImage() {
-		// Charge les différentes tuiles dans le vecteur tile[]
+		// Charge les diffï¿½rentes tuiles dans le vecteur tile[]
 	
 		try {
 			tile[0] = new Tile();
@@ -52,17 +51,24 @@ public class TileManager {
 			e.printStackTrace();
 		}
 	}
-	// Cette méthode charge la map 
+
+	//Mise Ã  jour de la map
+	public void updateMap(int id){
+
+	}
+
+
+	// Cette mï¿½thode charge la map
 	public void loadMap() {
 		//charger le fichier txt de la map
 		try {
 			
-			InputStream is = getClass().getResourceAsStream("/maps/map2.txt");
+			InputStream is = getClass().getResourceAsStream("/maps/map0.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		
 			int col = 0;
 			int row = 0;
-			// Parcourir le fichier txt pour récupérer les valeurs
+			// Parcourir le fichier txt pour rï¿½cupï¿½rer les valeurs
 			while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
 				String line = br.readLine();
 				while (col < gp.maxScreenCol) {
