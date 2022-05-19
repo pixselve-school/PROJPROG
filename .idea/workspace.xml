@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2a6bd983-3a0b-4a96-adff-39c46d9d7f9c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bin/entity/Entity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/entity/Player.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/main/GamePanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/main/KeyHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/main/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/maps/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/maps/map2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/player/superhero.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tile/Tile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tile/TileManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/BRICK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/BRICK2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/GRASS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/LAVA.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/SAND.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/SNOW.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/tiles/WATER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/entity/Entity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/entity/Player.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/main/GamePanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/main/KeyHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/main/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/maps/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/maps/map2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/player/superhero.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tile/Tile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tile/TileManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/BRICK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/BRICK2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/GRASS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/LAVA.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/SAND.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/SNOW.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/test/tiles/WATER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/maps/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/maps/map2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/player/superhero.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/BRICK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/BRICK2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/GRASS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/LAVA.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/SAND.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/SNOW.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/tiles/WATER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/GamePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/KeyHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tile/Tile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tile/TileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PROJPROG.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/FindSDL2_image.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constantes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/GameObject.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/GameObject.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Hero.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Hero.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Map.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Map.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/Renderer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/Renderer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/TextureManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/TextureManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jeuESIR.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/maps/map_lvl1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/player/p1_walk01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/tiles/grassCenter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/tiles/grassGreenCenter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ressources/tiles/liquidWater.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/CSVReader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/CSVReader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/MathUtils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Rectangle.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Timer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Timer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Vector2.h" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29NJekRlmoliZIbcsryIIlOqZIV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-18",
+    "last_opened_file_path": "/private/student/d/rd/mkerichard/IdeaProjects/PROJPROG",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2a6bd983-3a0b-4a96-adff-39c46d9d7f9c" name="Changes" comment="" />
+      <created>1652947707054</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652947707054</updated>
+      <workItem from="1652947708688" duration="52000" />
+      <workItem from="1652947786844" duration="128000" />
+      <workItem from="1652947925782" duration="86000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
