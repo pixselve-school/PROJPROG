@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Drawable {
     public Entity(int health, int strength, int speed) {
+        super(true, 0, 0, 20, 20);
         this.health = health;
         this.strength = strength;
         this.speed = speed;

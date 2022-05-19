@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	static ArrayList<Environment> environments;
 	static Environment currentEnvironment;
-		
+
 	// Constructeur de la classe
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,30 +54,44 @@ public class GamePanel extends JPanel implements Runnable {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
-	
-	
+
+	private boolean[] movements = new boolean[4];
+
 	public void run() {
 		
 		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
 		double nextDrawTime = System.nanoTime() + drawInterval; 
 
-		keyH.onKeyPress = (Integer code) -> {
-			if (code == KeyEvent.VK_Z) {
-				player.move(Direction.UP);
-			}
-			if (code == KeyEvent.VK_S) {
-				player.move(Direction.DOWN);
-			}
-			if (code == KeyEvent.VK_Q) {
-				player.move(Direction.LEFT);
-			}
-			if (code == KeyEvent.VK_D) {
-				player.move(Direction.RIGHT);
-			}
-			if (code == KeyEvent.VK_M) {
-			}
-			return null;
-		};
+    keyH.onKeyPress = (Integer code) -> {
+      if (code == KeyEvent.VK_Z) {
+        movements[0] = true;
+      }
+      if (code == KeyEvent.VK_S) {
+        movements[1] = true;
+      }
+      if (code == KeyEvent.VK_Q) {
+        movements[2] = true;
+      }
+      if (code == KeyEvent.VK_D) {
+        movements[3] = true;
+      }
+      return null;
+    };
+    keyH.onKeyReleased = (Integer code) -> {
+      if (code == KeyEvent.VK_Z) {
+        movements[0] = false;
+      }
+      if (code == KeyEvent.VK_S) {
+        movements[1] = false;
+      }
+      if (code == KeyEvent.VK_Q) {
+        movements[2] = false;
+      }
+      if (code == KeyEvent.VK_D) {
+        movements[3] = false;
+      }
+      return null;
+    };
 
 
 		while(gameThread != null) { //Tant que le thread du jeu est actif
@@ -109,11 +123,23 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 
-	
-	public void update() {
-		player.update();
-	}
-	
+  public void update() {
+    player.update();
+    if (movements[0]) {
+      player.move(Direction.UP);
+    }
+    if (movements[1]) {
+      player.move(Direction.DOWN);
+    }
+    if (movements[2]) {
+      player.move(Direction.LEFT);
+    }
+    if (movements[3]) {
+      player.move(Direction.RIGHT);
+    }
+
+  }
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -121,8 +147,8 @@ public class GamePanel extends JPanel implements Runnable {
 		player.draw(g2);
 		g2.dispose();
 	}
-	
-	
+
+
 }
 
 

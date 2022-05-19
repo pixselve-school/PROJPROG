@@ -85,6 +85,23 @@ public class Environment {
         }
     }
 
+    public void update(Player player) {
+        for (Tile tile : tiles) {
+            if (tile.isSolid()) {
+                if (tile.isColliding(player)) {
+                    player.setPosition(player.getOldPosition());
+                }
+            }
+        }
+        for (Entity entity : entities) {
+            if (entity.isSolid()) {
+                if (entity.isColliding(player)) {
+                    player.setPosition(player.getOldPosition());
+                }
+            }
+        }
+    }
+
     public void draw(Graphics2D g2) {
         tiles.forEach(tile -> tile.draw(g2));
         entities.forEach(tile -> tile.draw(g2));
