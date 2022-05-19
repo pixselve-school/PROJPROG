@@ -38,54 +38,75 @@ public class Environment {
     loadMap(pathToMap);
   }
 
-  // Cette m�thode charge la map
-  public void loadMap(String pathToMap) {
-    //charger le fichier txt de la map
-    try {
-      InputStream is = getClass().getResourceAsStream(pathToMap);
-      BufferedReader br = new BufferedReader(new InputStreamReader(is));
+    // Cette m�thode charge la map
+    public void loadMap(String pathToMap) {
+        //charger le fichier txt de la map
+        try {
+            InputStream is = getClass().getResourceAsStream(pathToMap);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-      int col = 0;
-      int row = 0;
-      // Parcourir le fichier txt pour r�cup�rer les valeurs
-      while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
-        String line = br.readLine();
-        while (col < GamePanel.maxScreenCol) {
-          String numbers[] = line.split(" ");
-          for (String s : numbers) {
-            System.out.println(s);
-          }
-          int num = Integer.parseInt(numbers[col]);
-          int ts = GamePanel.tileSize;
-          if (num < 0) {
-            tiles.add(new Portal(-num, col * ts, row * ts));
-          } else {
-            switch (num) {
-              case 0:
-                tiles.add(new Ground(col * ts, row * ts));
-                break;
-              case 1:
-                tiles.add(new Wall(col * ts, row * ts));
-                break;
-              case 2:
-                tiles.add(new Liquid(col * ts, row * ts));
-                break;
-              default:
-                tiles.add(new Ground(col * ts, row * ts));
+            int col = 0;
+            int row = 0;
+            // Parcourir le fichier txt pour r�cup�rer les valeurs
+            while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+                String line = br.readLine();
+                while (col < GamePanel.maxScreenCol) {
+                    String numbers[] = line.split(" ");
+                    int num = Integer.parseInt(numbers[col]);
+                    int ts = GamePanel.tileSize;
+                    if(num < 0){
+                        System.out.println(col + " " + row);
+                        if(col == 7){
+                            tiles.add(new Portal_left(-num,col*ts,row*ts));
+                        }
+                        else if (col == 8){
+                            tiles.add(new Portal_right(-num,col*ts,row*ts));
+                        }
+                        else if(row == 5){
+                            tiles.add(new Portal_sideUp(-num,col*ts,row*ts));
+                        }
+                        else if (row == 6){
+                            tiles.add(new Portal_sideDown(-num,col*ts,row*ts));
+                        }
+                    }
+                    else {
+                        switch (num) {
+                            case 0:
+                                tiles.add(new Ground(col * ts, row * ts));
+                                break;
+                            case 1:
+                                if(col == 0){
+                                    tiles.add(new Wall_left(col * ts, row * ts));
+                                }
+                                else if (col == GamePanel.maxScreenCol-1){
+                                    tiles.add(new Wall_right(col * ts, row * ts));
+                                }
+                                else if(row ==0) {
+                                    tiles.add(new Wall_back(col * ts, row * ts));
+                                }
+                                else if(row ==GamePanel.maxScreenRow-1){
+                                    tiles.add(new Wall_front(col * ts, row * ts));
+                                }
+                                break;
+                            case 2:
+                                tiles.add(new Liquid(col * ts, row * ts));
+                                break;
+                            default:
+                                tiles.add(new Ground(col * ts, row * ts));
+                        }
+                    }
+                    col++;
+                }
+                if (col == GamePanel.maxScreenCol) {
+                    col = 0;
+                    row ++;
+                }
             }
-          }
-          col++;
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        if (col == GamePanel.maxScreenCol) {
-          col = 0;
-          row++;
-        }
-      }
-      br.close();
-    } catch (IOException e) {
-      e.printStackTrace();
     }
-  }
 
   public void update(Player player) {
     boolean doesCollide = false;
