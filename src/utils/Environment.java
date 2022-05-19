@@ -18,11 +18,14 @@ public class Environment {
   private final LinkedList<Entity> entities;
   private final int index;
 
+  private final String mapPath;
+
   private Environment() {
     tiles = new LinkedList<>();
     entities = new LinkedList<>();
     nbEnv++;
     index = nbEnv;
+    mapPath = "";
   }
 
   public Environment(String pathToMap) {
@@ -30,7 +33,8 @@ public class Environment {
     entities = new LinkedList<>();
     nbEnv++;
     index = nbEnv;
-    loadMap(pathToMap);
+    mapPath = pathToMap;
+    loadMap();
   }
 
   public static boolean isPlayerCollidingWithDrawable(Drawable drawable) {
@@ -42,10 +46,10 @@ public class Environment {
   }
 
   // Cette m�thode charge la map
-  public void loadMap(String pathToMap) {
+  public void loadMap() {
     //charger le fichier txt de la map
     try {
-      InputStream is = getClass().getResourceAsStream(pathToMap);
+      InputStream is = getClass().getResourceAsStream(mapPath);
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
       int col = 0;
@@ -110,6 +114,22 @@ public class Environment {
         if (willPlayerCollideWithDrawable(tile)) {
           doesCollide = true;
           break;
+        }
+      } else if (tile instanceof Portal) {
+        if(willPlayerCollideWithDrawable(tile)){
+          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+          if(player.getPosition().getX() < 100){
+            player.setPosition(new Position(GamePanel.screenWidth - 100, player.getPosition().getY()));
+          }
+          else if(player.getPosition().getX() > GamePanel.screenWidth - 100){
+            player.setPosition(new Position(100, player.getPosition().getY()));
+          }
+          else if(player.getPosition().getY() < 100){
+            player.setPosition(new Position(player.getPosition().getX(), GamePanel.screenHeight - 100));
+          }
+          else if(player.getPosition().getY() > GamePanel.screenHeight - 100){
+            player.setPosition(new Position(player.getPosition().getX(), 100));
+          }
         }
       }
     }
