@@ -49,11 +49,11 @@ public abstract class Fight {
     public void run(){
         while(!m_end) {
             // Check the fastest to act
-            if(m_player.speed> m_opponent.speed) {
+            if(m_player.getSpeed()> m_opponent.getSpeed()) {
                 // Player turn
                 playerTurn();
                 // Check if player kills opponent
-                if(m_opponent.y==0) {
+                if(m_opponent.getHealth()==0) {
                     m_end = true;
                     break;
                 }
@@ -61,7 +61,7 @@ public abstract class Fight {
                 // Opponent turn
                 opponentTurn();
                 // Check if opponent kills player
-                if(m_player.y==0) {
+                if(m_player.getHealth()==0) {
                     m_end = true;
                     break;
                 }
@@ -70,7 +70,7 @@ public abstract class Fight {
                 // Opponent turn
                 opponentTurn();
                 // Check if opponent kills player
-                if(m_player.y==0) {
+                if(m_player.getHealth()==0) {
                     m_end = true;
                     break;
                 }
@@ -78,7 +78,7 @@ public abstract class Fight {
                 // Player turn
                 playerTurn();
                 // Check if player kills opponent
-                if(m_opponent.y==0) {
+                if(m_opponent.getHealth()==0) {
                     m_end = true;
                     break;
                 }

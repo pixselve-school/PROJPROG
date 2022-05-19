@@ -22,6 +22,10 @@ public abstract class Entity extends Drawable {
         return strength;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     private int health;
     private int strength;
 
