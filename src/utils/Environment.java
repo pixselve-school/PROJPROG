@@ -60,7 +60,18 @@ public class Environment {
                                 tiles.add(new Ground(col * ts, row * ts));
                                 break;
                             case 1:
-                                tiles.add(new Wall(col * ts, row * ts));
+                                if(col == 0){
+                                    tiles.add(new Wall_left(col * ts, row * ts));
+                                }
+                                else if (col == GamePanel.maxScreenCol-1){
+                                    tiles.add(new Wall_right(col * ts, row * ts));
+                                }
+                                else if(row ==0) {
+                                    tiles.add(new Wall_back(col * ts, row * ts));
+                                }
+                                else if(row ==GamePanel.maxScreenRow-1){
+                                    tiles.add(new Wall_front(col * ts, row * ts));
+                                }
                                 break;
                             case 2:
                                 tiles.add(new Liquid(col * ts, row * ts));
