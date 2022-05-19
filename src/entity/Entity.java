@@ -1,5 +1,6 @@
 package entity;
 
+import main.GamePanel;
 import utils.Drawable;
 import utils.Position;
 
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Drawable {
     public Entity(int health, int strength, int speed) {
-        super(true, 0, 0, 20, 20);
+        super(true, 150, 150, GamePanel.tileSize, GamePanel.tileSize);
         this.health = health;
         this.strength = strength;
         this.speed = speed;
