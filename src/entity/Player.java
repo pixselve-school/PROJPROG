@@ -44,7 +44,7 @@ public class Player extends Entity {
 		
 	}
 	
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2, GamePanel gamePanel) {
 		// r�cup�re l'image du joueur
 		BufferedImage image = idleImage;
 		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)

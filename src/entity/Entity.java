@@ -12,8 +12,6 @@ public abstract class Entity extends Drawable {
         this.strength = strength;
         this.speed = speed;
     }
-
-    private Position position;
     public BufferedImage idleImage;
 
     public int getHealth() {
