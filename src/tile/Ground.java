@@ -7,13 +7,19 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
+
+
 
 public class Ground extends Tile {
-    private static final BufferedImage image;
+    private static final BufferedImage[]image  = new BufferedImage[4];
 
     static {
         try {
-            image = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/GRASS.png")));
+            image[0] = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/BRICK_2.png")));
+            image[1] = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/BRICK_3.png")));
+            image[2] = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/BRICK_4.png")));
+            image[3] = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/tiles/BRICK.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -25,6 +31,8 @@ public class Ground extends Tile {
 
     @Override
     protected BufferedImage getImage() {
-        return image;
+        Random random = new Random();
+        int value = random.nextInt(0 + 3);
+        return image[value];
     }
 }
