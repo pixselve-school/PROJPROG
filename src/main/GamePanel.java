@@ -76,18 +76,6 @@ public class GamePanel extends JPanel implements Runnable {
       if (code == KeyEvent.VK_D) {
         player.addDirection(Direction.RIGHT);
       }
-	  if (code == KeyEvent.VK_UP) {
-		movements[0] = true;
-	  }
-	  if (code == KeyEvent.VK_DOWN) {
-		movements[1] = true;
-	  }
-	  if (code == KeyEvent.VK_LEFT) {
-		movements[2] = true;
-	  }
-	  if (code == KeyEvent.VK_RIGHT) {
-		movements[3] = true;
-	  }
       return null;
     };
     GamePanel.keyH.onKeyReleased = (Integer code) -> {
@@ -103,18 +91,6 @@ public class GamePanel extends JPanel implements Runnable {
       if (code == KeyEvent.VK_D) {
         player.removeDirection(Direction.RIGHT);
       }
-	  if (code == KeyEvent.VK_UP) {
-		movements[0] = false;
-	  }
-	  if (code == KeyEvent.VK_DOWN) {
-		movements[1] = false;
-	  }
-	  if (code == KeyEvent.VK_LEFT) {
-		movements[2] = false;
-	  }
-	  if (code == KeyEvent.VK_RIGHT) {
-		movements[3] = false;
-	  }
       return null;
     };
 

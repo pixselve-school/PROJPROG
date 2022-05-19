@@ -55,7 +55,6 @@ public class Environment {
                     int num = Integer.parseInt(numbers[col]);
                     int ts = GamePanel.tileSize;
                     if(num < 0){
-                        System.out.println(col + " " + row);
                         if(col == 7){
                             tiles.add(new Portal_left(-num,col*ts,row*ts));
                         }
