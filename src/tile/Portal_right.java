@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Portal_right extends Ground {
+public class Portal_right extends Portal {
   private static final BufferedImage image;
 
   static {
@@ -16,11 +16,9 @@ public class Portal_right extends Ground {
     }
   }
 
-  private final int tp;
 
   public Portal_right(int map, int x, int y) {
-    super(x, y);
-    tp = map;
+    super(map, x, y);
 
   }
 

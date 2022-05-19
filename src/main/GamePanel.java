@@ -25,8 +25,9 @@ public class GamePanel extends JPanel implements Runnable {
   // FPS : taux de rafraichissement
   static int FPS = 60;
   static Thread gameThread;
-  static ArrayList<Environment> environments;
-  static Environment currentEnvironment;
+
+  public static ArrayList<Environment> environments;
+  public static Environment currentEnvironment;
 
   // Constructeur de la classe
   public GamePanel() {
@@ -119,7 +120,6 @@ public class GamePanel extends JPanel implements Runnable {
 
   public void update() {
     player.update();
-
     currentEnvironment.update(player);
   }
 
