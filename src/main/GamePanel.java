@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.JPanel;
 
+import entity.Direction;
 import entity.Player;
 import tile.TileManager;
 
@@ -11,18 +12,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable{
-	//Paramètres de l'écran
+	//Paramï¿½tres de l'ï¿½cran
 	final int originalTileSize = 16; // une tuile de taille 16x16
-	final int scale = 3; // échelle utilisée pour agrandir l'affichage
+	final int scale = 3; // ï¿½chelle utilisï¿½e pour agrandir l'affichage
 	public final int tileSize = originalTileSize * scale; // 48x48
 	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12; // ces valeurs donnent une résolution 4:3
+	public final int maxScreenRow = 12; // ces valeurs donnent une rï¿½solution 4:3
 	public final int screenWidth = tileSize * maxScreenCol; //768 pixels
 	public final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// FPS : taux de rafraichissement
 	int FPS = 60;
-	// Création des différentes instances (Player, KeyHandler, TileManager, GameThread ...)
+	// Crï¿½ation des diffï¿½rentes instances (Player, KeyHandler, TileManager, GameThread ...)
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	Player player = new Player(this, keyH);
@@ -46,14 +47,31 @@ public class GamePanel extends JPanel implements Runnable{
 	public void run() {
 		
 		double drawInterval = 1000000000/FPS; // rafraichissement chaque 0.0166666 secondes
-		double nextDrawTime = System.nanoTime() + drawInterval; 
+		double nextDrawTime = System.nanoTime() + drawInterval;
+
+		keyH.onKeyPress = (Integer keyCode) -> {
+			System.out.println(keyCode);
+			if (keyCode == 90) {
+				player.move(Direction.UP);
+			}
+			if (keyCode == 83) {
+				player.move(Direction.DOWN);
+			}
+			if (keyCode == 81) {
+				player.move(Direction.LEFT);
+			}
+			if (keyCode == 68) {
+				player.move(Direction.RIGHT);
+			}
+			return null;
+		};
 		
 		while(gameThread != null) { //Tant que le thread du jeu est actif
 			
 			
-			//Permet de mettre à jour les différentes variables du jeu
+			//Permet de mettre ï¿½ jour les diffï¿½rentes variables du jeu
 			update();
-			//Dessine sur l'écran le personnage et la map avec les nouvelles informations. la méthode "paintComponent" doit obligatoirement être appelée avec "repaint()"
+			//Dessine sur l'ï¿½cran le personnage et la map avec les nouvelles informations. la mï¿½thode "paintComponent" doit obligatoirement ï¿½tre appelï¿½e avec "repaint()"
 			repaint();
 			//Calcule le temps de pause du thread
 			
