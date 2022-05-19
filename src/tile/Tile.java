@@ -10,7 +10,7 @@ public abstract class Tile extends Drawable {
 	protected abstract BufferedImage getImage();
 
 	public Tile(boolean solid, int x, int y){
-		super(solid, x, y);
+		super(solid, x, y, GamePanel.tileSize, GamePanel.tileSize);
 	}
 
 	@Override

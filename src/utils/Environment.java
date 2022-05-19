@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class Environment {
-    private static Environment instance;
     private LinkedList<Tile> tiles;
     private LinkedList<Entity> entities;
 
@@ -20,6 +19,23 @@ public class Environment {
 
     public Environment(String pathToMap) {
 //        TODO:
+    }
+
+    public void update(Player player) {
+        for (Tile tile : tiles) {
+            if (tile.isSolid()) {
+                if (tile.isColliding(player)) {
+                    player.setPosition(player.getOldPosition());
+                }
+            }
+        }
+        for (Entity entity : entities) {
+            if (entity.isSolid()) {
+                if (entity.isColliding(player)) {
+                    player.setPosition(player.getOldPosition());
+                }
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {
