@@ -3,6 +3,7 @@ package utils;
 import entity.Chest;
 import entity.Entity;
 import entity.Player;
+import items.Sword;
 import main.GamePanel;
 import tile.*;
 
@@ -102,10 +103,6 @@ public class Environment extends Scene {
           row++;
         }
       }
-
-
-      entities.add(new Chest(new Position(GamePanel.tileSize * 4, GamePanel.tileSize * 2)));
-
       br.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -149,6 +146,7 @@ public class Environment extends Scene {
           if (entity instanceof Chest chest) {
             if (!chest.isOpen()) {
               chest.open();
+              player.addItemToInventory(new Sword());
             }
           }
           break;
