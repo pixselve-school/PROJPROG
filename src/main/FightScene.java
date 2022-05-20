@@ -206,8 +206,8 @@ public class FightScene extends Scene {
     final int WIDTH = 15;
     final int HEIGHT = (int) (WIDTH * 1.7);
 
-    final int START_X = GamePanel.player.getPosition().getX();
-    final int START_Y = GamePanel.player.getPosition().getX();
+    final int START_X = 75;
+    final int START_Y = 350;
 
     for (int i = 0; i < GamePanel.player.getHealth(); i++) {
       if (i % 2 == 0) {
