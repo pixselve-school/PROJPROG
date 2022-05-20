@@ -6,6 +6,7 @@ import entity.Entity;
 import entity.Player;
 import entity.monsters.Monster;
 import entity.monsters.Skeleton;
+import entity.monsters.Vampire;
 import items.Sword;
 import main.FightScene;
 import main.GamePanel;
@@ -167,6 +168,9 @@ public class Environment extends Scene {
                 break;
               case 2:
                 entities.add(new Skeleton(new Position(col*ts, row*ts)));
+                break;
+              case 3:
+                entities.add(new Vampire(new Position(col*ts, row*ts)));
                 break;
               default:
                 //rien
