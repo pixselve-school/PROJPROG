@@ -1,7 +1,9 @@
 package utils;
 
+import entity.Chest;
 import entity.Entity;
 import entity.Player;
+import items.Sword;
 import main.GamePanel;
 import tile.*;
 
@@ -119,19 +121,16 @@ public class Environment extends Scene {
         if (isPlayerCollidingWithDrawable(tile)) {
           //        The player is on the portal
 
-          if(player.getPosition().getX() < 100){
+          if (player.getPosition().getX() < 100) {
             player.setPosition(new Position(GamePanel.screenWidth - 100, player.getPosition().getY()));
-          }
-          else if(player.getPosition().getX() > GamePanel.screenWidth - 100){
+          } else if (player.getPosition().getX() > GamePanel.screenWidth - 100) {
             player.setPosition(new Position(100, player.getPosition().getY()));
-          }
-          else if(player.getPosition().getY() < 100){
+          } else if (player.getPosition().getY() < 100) {
             player.setPosition(new Position(player.getPosition().getX(), GamePanel.screenHeight - 100));
-          }
-          else if(player.getPosition().getY() > GamePanel.screenHeight - 100){
+          } else if (player.getPosition().getY() > GamePanel.screenHeight - 100) {
             player.setPosition(new Position(player.getPosition().getX(), 100));
           }
-          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp() - 1);
           return;
 
 
@@ -139,6 +138,23 @@ public class Environment extends Scene {
 
       }
     }
+
+    for (Entity entity : entities) {
+      if (entity.isSolid()) {
+        if (willPlayerCollideWithDrawable(entity)) {
+          doesCollide = true;
+          if (entity instanceof Chest chest) {
+            if (!chest.isOpen()) {
+              chest.open();
+              player.addItemToInventory(new Sword());
+            }
+          }
+          break;
+        }
+      }
+    }
+
+
     if (!doesCollide) {
       player.move();
     }

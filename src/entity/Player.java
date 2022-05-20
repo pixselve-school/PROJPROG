@@ -1,5 +1,6 @@
 package entity;
 
+import items.Item;
 import main.GamePanel;
 import utils.Drawable;
 import utils.Position;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Player extends Entity {
@@ -26,10 +28,22 @@ public class Player extends Entity {
   public Position nextPosition;
   private final HashSet<Direction> directions;
 
+  public LinkedList<Item> getInventory() {
+    return inventory;
+  }
+
+  public void addItemToInventory(Item item) {
+    inventory.add(item);
+  }
+
+  private LinkedList<Item> inventory;
+
+
   public Player() {
     super(100, 100, 5);
     this.nextPosition = this.getPosition();
     this.directions = new HashSet<>();
+    this.inventory = new LinkedList<>();
   }
 
   public void update() {
