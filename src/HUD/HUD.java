@@ -43,10 +43,8 @@ public class HUD {
     final int START_X = 5;
     final int START_Y = 5;
 
-    int half_heart = 9;
-    g2.setColor(Color.RED);
 
-    for (int i = 0; i < half_heart; i++) {
+    for (int i = 0; i < GamePanel.player.getHealth(); i++) {
       if (i % 2 == 0) {
         g2.drawImage(left_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
       } else {

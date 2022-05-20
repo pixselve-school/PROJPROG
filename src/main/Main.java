@@ -2,8 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.TmpMob;
-import fight.EntityFight;
-import fight.Fight;
+import utils.Scene;
 
 import javax.swing.*;
 
