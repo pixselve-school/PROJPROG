@@ -122,7 +122,7 @@ public class Environment extends Scene {
           int ts = GamePanel.tileSize;
           switch (num) {
               case 1:
-                entities.add(new TmpMob(1, 1, 1));
+                entities.add(new Chest(new Position(col*ts, row*ts)));
                 break;
               default:
                 //rien
