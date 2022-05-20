@@ -24,12 +24,14 @@ public class Main_Menu extends Scene {
 
     public Main_Menu(String pathToMusic) {
         super(pathToMusic);
+        playMusic();
     }
 
     @Override
     public void initialize() {
         GamePanel.keyH.onKeyPress = (Integer code) -> {
             if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
+                stopMusic();
                 GamePanel.setScene(GamePanel.environments.get(0));
             }
             return null;
