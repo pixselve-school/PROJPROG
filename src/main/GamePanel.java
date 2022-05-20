@@ -41,9 +41,9 @@ public class GamePanel extends JPanel implements Runnable {
     environments.add(new Environment("/maps/map1.txt"));
     environments.add(new Environment("/maps/map2.txt"));
     environments.add(new Environment("/maps/map3.txt"));
-    environments.add(new Environment("/maps/map4.txt"));
-    environments.add(new Environment("/maps/map5.txt"));
-    environments.add(new Environment("/maps/map6.txt"));
+    //environments.add(new Environment("/maps/map4.txt"));
+    //environments.add(new Environment("/maps/map5.txt"));
+    //environments.add(new Environment("/maps/map6.txt"));
     currentEnvironment = Launch;
     oldScene = Launch;
     currentEnvironment.initialize();
