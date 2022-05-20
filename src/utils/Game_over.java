@@ -22,6 +22,7 @@ public class Game_over extends Scene {
 
     public Game_over(String pathToMusic) {
         super(pathToMusic);
+        //playMusic();
     }
 
     @Override

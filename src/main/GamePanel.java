@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
     this.addKeyListener(keyH);
     this.setFocusable(true);
     environments = new ArrayList<>();
-    Main_Menu Launch = new Main_Menu("/Musics/theme.wav");
+    Main_Menu Launch = new Main_Menu("menu");
     environments.add(new Environment("/maps/map1.txt"));
     environments.add(new Environment("/maps/map2.txt"));
     environments.add(new Environment("/maps/map3.txt"));
@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     currentEnvironment = Launch;
     oldScene = Launch;
     currentEnvironment.initialize();
+
   }
 
   public void startGameThread() {
@@ -107,12 +108,12 @@ public class GamePanel extends JPanel implements Runnable {
     currentEnvironment.update(player);
 
     if (player.getHealth() <= 0) {
-      Game_over End = new Game_over("theme");
+      Game_over End = new Game_over("menu");
       setScene(End);
     }
 
     if (environments.stream().allMatch(Environment::isCompleted)) {
-      Win_Menu win_menu = new Win_Menu("theme");
+      Win_Menu win_menu = new Win_Menu("open_chest");
       setScene(win_menu);
     }
   }

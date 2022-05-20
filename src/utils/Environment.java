@@ -39,6 +39,7 @@ public class Environment extends Scene {
   }
 
   public Environment(String pathToMap) {
+    super("theme");
     tiles = new LinkedList<>();
     entities = new LinkedList<>();
     nbEnv++;
