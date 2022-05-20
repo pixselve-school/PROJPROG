@@ -24,7 +24,12 @@ public class Game_over extends Scene {
         super(pathToMusic);
     }
 
-    public void update(Player player){
+    @Override
+    public void initialize() {
+
+    }
+
+    public void update(Player player) {
 
     }
 

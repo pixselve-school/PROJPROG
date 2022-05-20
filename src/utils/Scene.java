@@ -12,6 +12,8 @@ public abstract class Scene {
     ambianceMusic = new Music(pathToMusic);
   }
 
+  public abstract void initialize();
+
   public Scene() {
   }
 

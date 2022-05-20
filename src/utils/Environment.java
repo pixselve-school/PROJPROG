@@ -1,19 +1,18 @@
 package utils;
 
 import entity.Chest;
+import entity.Direction;
 import entity.Entity;
 import entity.Player;
-import entity.TmpMob;
 import entity.monsters.Monster;
 import entity.monsters.Skeleton;
-import fight.Fight;
 import items.Sword;
-
 import main.FightScene;
 import main.GamePanel;
 import tile.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +50,40 @@ public class Environment extends Scene {
 
   public static boolean willPlayerCollideWithDrawable(Drawable drawable) {
     return GamePanel.player.collideNextBoundingBox(drawable);
+  }
+
+  public void initialize() {
+    GamePanel.keyH.onKeyPress = (Integer code) -> {
+      if (code == KeyEvent.VK_W) {
+        GamePanel.player.addDirection(Direction.UP);
+      }
+      if (code == KeyEvent.VK_S) {
+        GamePanel.player.addDirection(Direction.DOWN);
+      }
+      if (code == KeyEvent.VK_A) {
+        GamePanel.player.addDirection(Direction.LEFT);
+      }
+      if (code == KeyEvent.VK_D) {
+        GamePanel.player.addDirection(Direction.RIGHT);
+      }
+      return null;
+    };
+
+    GamePanel.keyH.onKeyReleased = (Integer code) -> {
+      if (code == KeyEvent.VK_W) {
+        GamePanel.player.removeDirection(Direction.UP);
+      }
+      if (code == KeyEvent.VK_S) {
+        GamePanel.player.removeDirection(Direction.DOWN);
+      }
+      if (code == KeyEvent.VK_A) {
+        GamePanel.player.removeDirection(Direction.LEFT);
+      }
+      if (code == KeyEvent.VK_D) {
+        GamePanel.player.removeDirection(Direction.RIGHT);
+      }
+      return null;
+    };
   }
 
   // Cette m�thode charge la map
@@ -174,7 +207,7 @@ public class Environment extends Scene {
           else if(player.getPosition().getY() > GamePanel.screenHeight - (int)(GamePanel.tileSize*2.2)){
             player.setPosition(new Position(player.getPosition().getX(), (int)(GamePanel.tileSize*1.2)));
           }
-          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp() - 1);
+          GamePanel.setScene(GamePanel.environments.get(((Portal) tile).getTp() - 1));
           return;
         }
       }
@@ -191,7 +224,7 @@ public class Environment extends Scene {
             }
           } else if (entity instanceof Monster monster) {
             Scene f = new FightScene(monster);
-            GamePanel.currentEnvironment=f;
+            GamePanel.setScene(f);
           }
           break;
         }

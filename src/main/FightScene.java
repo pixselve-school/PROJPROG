@@ -111,15 +111,21 @@ public class FightScene extends Scene {
     m_opp.setHealth(GamePanel.player.getStrength());
   }
 
+  @Override
+  public void initialize() {
+
+  }
+
   /**
    * Update the scene
+   *
    * @param player the player
    */
   @Override
   public void update(Player player) {
 
-      System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
-      // Check the fastest to act
+    System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
+    // Check the fastest to act
       if (player.getSpeed() > m_opp.getSpeed()) {
         // Player turn
         playerTurn();

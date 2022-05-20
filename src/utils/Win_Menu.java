@@ -24,7 +24,12 @@ public class Win_Menu extends Scene{
         super(pathToMusic);
     }
 
-    public void update(Player player){
+    @Override
+    public void initialize() {
+
+    }
+
+    public void update(Player player) {
 
     }
 
