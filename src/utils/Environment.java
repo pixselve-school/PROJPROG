@@ -146,18 +146,17 @@ public class Environment extends Scene {
       } else if (tile instanceof Portal) {
         if (isPlayerCollidingWithDrawable(tile)) {
           //        The player is on the portal
-
-          if(player.getPosition().getX() < 100){
-            player.setPosition(new Position(GamePanel.screenWidth - 100, player.getPosition().getY()));
+          if(player.getPosition().getX() < GamePanel.tileSize*1.2){
+            player.setPosition(new Position(GamePanel.screenWidth - (int)(GamePanel.tileSize*2.2), player.getPosition().getY()));
           }
-          else if(player.getPosition().getX() > GamePanel.screenWidth - 100){
-            player.setPosition(new Position(100, player.getPosition().getY()));
+          else if(player.getPosition().getX() > GamePanel.screenWidth - (int)(GamePanel.tileSize*2.2)){
+            player.setPosition(new Position((int)(GamePanel.tileSize*1.2), player.getPosition().getY()));
           }
-          else if(player.getPosition().getY() < 100){
-            player.setPosition(new Position(player.getPosition().getX(), GamePanel.screenHeight - 100));
+          else if(player.getPosition().getY() < GamePanel.tileSize*1.2){
+            player.setPosition(new Position(player.getPosition().getX(), GamePanel.screenHeight - (int)(GamePanel.tileSize*2.2)));
           }
-          else if(player.getPosition().getY() > GamePanel.screenHeight - 100){
-            player.setPosition(new Position(player.getPosition().getX(), 100));
+          else if(player.getPosition().getY() > GamePanel.screenHeight - (int)(GamePanel.tileSize*2.2)){
+            player.setPosition(new Position(player.getPosition().getX(), (int)(GamePanel.tileSize*1.2)));
           }
           GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
           return;
