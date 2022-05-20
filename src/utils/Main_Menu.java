@@ -5,6 +5,7 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -25,7 +26,17 @@ public class Main_Menu extends Scene {
         super(pathToMusic);
     }
 
-    public void update(Player player){
+    @Override
+    public void initialize() {
+        GamePanel.keyH.onKeyPress = (Integer code) -> {
+            if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
+                GamePanel.setScene(GamePanel.environments.get(0));
+            }
+            return null;
+        };
+    }
+
+    public void update(Player player) {
 
     }
 

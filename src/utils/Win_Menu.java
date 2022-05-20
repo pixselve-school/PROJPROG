@@ -14,7 +14,7 @@ public class Win_Menu extends Scene{
 
     static {
         try {
-            image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/menu/Win.png")));
+            image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/Menu/Win_Menu.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +24,12 @@ public class Win_Menu extends Scene{
         super(pathToMusic);
     }
 
-    public void update(Player player){
+    @Override
+    public void initialize() {
+
+    }
+
+    public void update(Player player) {
 
     }
 

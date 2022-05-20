@@ -13,7 +13,7 @@ public abstract class Entity extends Drawable {
   private final int speed;
 
   public Entity(int health, int strength, int speed) {
-    super(true, 150, 150, GamePanel.tileSize, GamePanel.tileSize);
+    super(true, 360, 528, GamePanel.tileSize, GamePanel.tileSize);
     this.health = health;
     this.strength = strength;
     this.speed = speed;

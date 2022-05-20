@@ -1,9 +1,5 @@
 package main;
 
-import entity.Entity;
-import entity.TmpMob;
-import utils.Scene;
-
 import javax.swing.*;
 
 

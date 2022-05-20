@@ -76,4 +76,6 @@ public abstract class Drawable {
    */
   public abstract void draw(Graphics2D g2);
 
+  public abstract void draw(Graphics2D graphics2D, Position position, int width, int height);
+
 }
