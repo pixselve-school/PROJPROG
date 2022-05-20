@@ -1,7 +1,6 @@
 package items;
 
 import tile.Wall;
-import utils.Music;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -18,6 +17,10 @@ public class Sword extends Item {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public Sword() {
+    super(2);
   }
 
 

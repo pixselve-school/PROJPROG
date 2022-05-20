@@ -86,6 +86,18 @@ public class Player extends Entity {
     return x + width > otherX && x < otherX + otherWidth && y + height > otherY && y < otherY + otherHeight;
   }
 
+  @Override
+  public int getStrength() {
+    return super.getStrength() + totalGivenStrength();
+  }
+
+  private int totalGivenStrength() {
+    int total = 0;
+    for (Item item : inventory) {
+      total += item.getGivenStrength();
+    }
+    return total;
+  }
 
   public void draw(Graphics2D g2) {
     draw(g2, getPosition(), GamePanel.tileSize, GamePanel.tileSize);
