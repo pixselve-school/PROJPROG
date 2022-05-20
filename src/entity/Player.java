@@ -46,7 +46,7 @@ public class Player extends Entity {
 
 
   public Player() {
-    super(10, 5, 5);
+    super(10, 4, 5);
 
     this.nextPosition = this.getPosition();
     this.directions = new HashSet<>();
