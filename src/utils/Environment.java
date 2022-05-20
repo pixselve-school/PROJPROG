@@ -132,6 +132,9 @@ public class Environment extends Scene {
               case 1:
                 entities.add(new Chest(new Position(col*ts, row*ts)));
                 break;
+              case 2:
+                entities.add(new Skeleton(new Position(col*ts, row*ts)));
+                break;
               default:
                 //rien
           }
@@ -174,7 +177,6 @@ public class Environment extends Scene {
           GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp() - 1);
           return;
         }
-
       }
     }
 
