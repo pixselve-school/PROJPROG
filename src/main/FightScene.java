@@ -34,7 +34,7 @@ public class FightScene extends Scene {
     m_end = false;
     m_menu = false;
 
-    //playMusic();
+    playMusic();
 
     System.out.println("START : Player Health : " + GamePanel.player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
 
@@ -124,7 +124,7 @@ public class FightScene extends Scene {
         // Player turn
         playerTurn();
         // Check if player kills opponent
-        if (m_opp.getHealth() < 0) {
+        if (m_opp.getHealth() <= 0) {
           m_end = true;
         }
 
@@ -133,14 +133,14 @@ public class FightScene extends Scene {
           opponentTurn();
         }
         // Check if opponent kills player
-        if (player.getHealth() < 0) {
+        if (player.getHealth() <= 0) {
           m_end = true;
         }
       } else {
         // Opponent turn
         opponentTurn();
         // Check if opponent kills player
-        if (player.getHealth() < 0) {
+        if (player.getHealth() <= 0) {
           m_end = true;
         }
 
@@ -149,7 +149,7 @@ public class FightScene extends Scene {
           playerTurn();
         }
         // Check if player kills opponent
-        if (m_opp.getHealth() < 0) {
+        if (m_opp.getHealth() <= 0) {
           m_end = true;
         }
       }
