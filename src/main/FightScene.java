@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import tile.Wall;
+import utils.Position;
 import utils.Scene;
 
 import javax.imageio.ImageIO;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -21,6 +24,9 @@ public class FightScene extends Scene {
   private BufferedImage background;
   private BufferedImage attackButton;
   private BufferedImage escapeButton;
+
+  private static BufferedImage left_heart;
+  private static BufferedImage right_heart;
 
   private boolean m_end;
 
@@ -55,6 +61,13 @@ public class FightScene extends Scene {
       System.out.println(ex);
     }
 
+    try {
+      left_heart = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/HUD/left_half_heart.png")));
+      right_heart = ImageIO.read(Objects.requireNonNull(Wall.class.getResource("/HUD/right_half_heart.png")));
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+
     menu = false;
   }
 
@@ -71,11 +84,11 @@ public class FightScene extends Scene {
     AtomicBoolean played = new AtomicBoolean(false);
     while(!played.get()) {
       GamePanel.keyH.onKeyPress = (Integer code) -> {
-        if (code == KeyEvent.VK_A) {
+        if (code == KeyEvent.VK_O) {
           attack();
           played.set(true);
         }
-        if (code == KeyEvent.VK_Z) {
+        if (code == KeyEvent.VK_P) {
           escape();
           played.set(false);
         }
@@ -175,15 +188,34 @@ public class FightScene extends Scene {
     // draw the background
     g2.drawImage(background, 0, 0, null);
 
+    drawHealth(g2);
+
     // draw opponent
-    m_opp.draw(g2);
+    m_opp.draw(g2, new Position(440, 225), m_opp.getWidth(), m_opp.getHeight());
 
     // draw player
-    g2.setColor(Color.GREEN);
-    g2.fillRect(75, 400, 140, 200);
+    GamePanel.player.draw(g2, new Position(75, 400), 3*GamePanel.player.getWidth(), 3*GamePanel.player.getHeight());
 
     g2.drawImage(attackButton, 500, 375, null);
     g2.drawImage(escapeButton, 495, 475, null);
 
   }
-}
+
+  private static void drawHealth(Graphics2D g2, Entity entity) {
+    final int WIDTH = 15;
+    final int HEIGHT = (int) (WIDTH * 1.7);
+
+    final int START_X = 5;
+    final int START_Y = 5;
+
+
+    for (int i = 0; i < entity.getHealth(); i++) {
+      if (i % 2 == 0) {
+        g2.drawImage(left_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
+      } else {
+        g2.drawImage(right_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
+      }
+    }
+  }
+
+  }

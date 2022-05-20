@@ -21,7 +21,7 @@ public class Skeleton extends Monster {
   }
 
   public Skeleton(Position position) {
-    super(position, 3, 3, 3, (int) (GamePanel.tileSize * 1.5), (int) (GamePanel.tileSize * 1.5));
+    super(position, 3, 1, 30, (int) (GamePanel.tileSize * 1.5), (int) (GamePanel.tileSize * 1.5));
   }
 
   public BufferedImage getImage() {
