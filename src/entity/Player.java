@@ -119,16 +119,16 @@ public class Player extends Entity {
     // affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
     switch (state){
       case 1:
-        g2.drawImage(image[1], position.getX(), position.getY(), width, height, null);
+        graphics2D.drawImage(image[1], position.getX(), position.getY(), width, height, null);
         break;
       case 2:
-        g2.drawImage(image[2], position.getX(), position.getY(), width, height, null);
+        graphics2D.drawImage(image[2], position.getX(), position.getY(), width, height, null);
         break;
       case 3:
-        g2.drawImage(image[3], position.getX(), position.getY(), width, height, null);
+        graphics2D.drawImage(image[3], position.getX(), position.getY(), width, height, null);
         break;
       default:
-        g2.drawImage(image[0], position.getX(), position.getY(), width, height, null);
+        graphics2D.drawImage(image[0], position.getX(), position.getY(), width, height, null);
     }
     if (GamePanel.DEBUG) {
       drawBoundings(graphics2D, Color.BLUE);
