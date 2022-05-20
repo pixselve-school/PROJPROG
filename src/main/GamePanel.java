@@ -4,6 +4,8 @@ import HUD.HUD;
 import entity.Direction;
 import entity.Player;
 import utils.Environment;
+import utils.Game_over;
+import utils.Main_Menu;
 import utils.Scene;
 
 import javax.swing.*;
@@ -40,14 +42,15 @@ public class GamePanel extends JPanel implements Runnable {
     this.addKeyListener(keyH);
     this.setFocusable(true);
     environments = new ArrayList<>();
+    Main_Menu Launch = new Main_Menu("/Musics/theme.wav");
     environments.add(new Environment("/maps/map1.txt"));
     environments.add(new Environment("/maps/map2.txt"));
     environments.add(new Environment("/maps/map3.txt"));
     environments.add(new Environment("/maps/map4.txt"));
     environments.add(new Environment("/maps/map5.txt"));
     environments.add(new Environment("/maps/map6.txt"));
-    currentEnvironment = environments.get(0);
-    oldScene = environments.get(0);
+    currentEnvironment = Launch;
+    oldScene = Launch;
   }
 
   public void startGameThread() {
@@ -73,27 +76,41 @@ public class GamePanel extends JPanel implements Runnable {
     double drawInterval = 1000000000 / FPS; // rafraichissement chaque 0.0166666 secondes
     double nextDrawTime = System.nanoTime() + drawInterval;
 
+    if(player.getHealth()==0){
+      oldScene = currentEnvironment;
+      Game_over End = new Game_over("/Musics/theme.wav");
+      currentEnvironment = End;
+    }
 
     GamePanel.keyH.onKeyPress = (Integer code) -> {
-      if (code == KeyEvent.VK_W) {
-        player.addDirection(Direction.UP);
-      }
-      if (code == KeyEvent.VK_S) {
-        player.addDirection(Direction.DOWN);
-      }
-      if (code == KeyEvent.VK_A) {
-        player.addDirection(Direction.LEFT);
-      }
-      if (code == KeyEvent.VK_D) {
-        player.addDirection(Direction.RIGHT);
-      }
-      if (code == KeyEvent.VK_F) {
-        if (currentEnvironment instanceof FightPanel) {
-          revertScene();
-        } else {
-          setScene(new FightPanel(new Player()));
-
+      if (currentEnvironment instanceof Environment) {
+        if (code == KeyEvent.VK_W) {
+          player.addDirection(Direction.UP);
         }
+        if (code == KeyEvent.VK_S) {
+          player.addDirection(Direction.DOWN);
+        }
+        if (code == KeyEvent.VK_A) {
+          player.addDirection(Direction.LEFT);
+        }
+        if (code == KeyEvent.VK_D) {
+          player.addDirection(Direction.RIGHT);
+        }
+        if (code == KeyEvent.VK_F) {
+          setScene(new FightPanel(new Player()));
+        }
+
+      }
+      else if (currentEnvironment instanceof FightPanel) {
+        if (code == KeyEvent.VK_F) {
+          revertScene();
+        }
+      }
+      else if (currentEnvironment instanceof Main_Menu){
+        if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
+          currentEnvironment = environments.get(0);
+        }
+
       }
       return null;
     };
@@ -152,7 +169,7 @@ public class GamePanel extends JPanel implements Runnable {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
     currentEnvironment.draw(g2);
-    if (!(currentEnvironment instanceof FightPanel)) {
+    if ((currentEnvironment instanceof Environment)) {
 //      Do not draw the player when in fight mode
       player.draw(g2);
     }
