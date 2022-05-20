@@ -84,7 +84,12 @@ public class Environment extends Scene {
                 } else if (col == GamePanel.maxScreenCol - 1) {
                   tiles.add(new Wall_right(col * ts, row * ts));
                 } else if (row == 0) {
-                  tiles.add(new Wall_back(col * ts, row * ts));
+                  if(col == 2 || col == 13){
+                    tiles.add(new Wall_back(false,col * ts, row * ts));
+                  }
+                  else{
+                    tiles.add(new Wall_back(true,col * ts, row * ts));
+                  }
                 } else if (row == GamePanel.maxScreenRow - 1) {
                   tiles.add(new Wall_front(col * ts, row * ts));
                 }
