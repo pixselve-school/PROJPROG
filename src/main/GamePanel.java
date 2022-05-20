@@ -3,6 +3,7 @@ package main;
 import HUD.HUD;
 import entity.Direction;
 import entity.Player;
+import entity.TmpMob;
 import utils.Environment;
 import utils.Game_over;
 import utils.Main_Menu;
@@ -65,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
     currentEnvironment = scene;
   }
 
-  private static void revertScene() {
+  public static void revertScene() {
     currentEnvironment.reset();
     currentEnvironment = oldScene;
   }
@@ -97,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
           player.addDirection(Direction.RIGHT);
         }
         if (code == KeyEvent.VK_F) {
-          setScene(new FightPanel(new Player()));
+          setScene(new FightPanel(new TmpMob(10, 1, 5)));
         }
 
       }
