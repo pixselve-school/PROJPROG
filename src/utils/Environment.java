@@ -3,6 +3,8 @@ package utils;
 import entity.Chest;
 import entity.Entity;
 import entity.Player;
+import entity.monsters.Monster;
+import entity.monsters.Skeleton;
 import items.Sword;
 import main.GamePanel;
 import tile.*;
@@ -148,12 +150,16 @@ public class Environment extends Scene {
               chest.open();
               player.addItemToInventory(new Sword());
             }
+          } else if (entity instanceof Monster monster) {
+            // TODO: faire quelque chose avec monster
           }
           break;
         }
       }
     }
 
+
+    entities.add(new Skeleton(new Position(150, 300)));
 
     if (!doesCollide) {
       player.move();
