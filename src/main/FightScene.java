@@ -197,8 +197,8 @@ public class FightScene extends Scene {
     // draw player
     GamePanel.player.draw(g2, new Position(75, 400), 3*GamePanel.player.getWidth(), 3*GamePanel.player.getHeight());
 
-    g2.drawImage(attackButton, 500, 375, null);
-    g2.drawImage(escapeButton, 495, 475, null);
+    g2.drawImage(attackButton, 525, 450, null);
+    g2.drawImage(escapeButton, 625, 450, null);
 
   }
 
