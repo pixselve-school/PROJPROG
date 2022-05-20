@@ -6,7 +6,9 @@ import entity.Entity;
 import entity.Player;
 import entity.monsters.Monster;
 import entity.monsters.Skeleton;
+import entity.monsters.Vampire;
 import items.Sword;
+import items.heal_potion;
 import main.FightScene;
 import main.GamePanel;
 import tile.*;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Environment extends Scene {
   static int nbEnv = 0;
@@ -66,6 +69,11 @@ public class Environment extends Scene {
       if (code == KeyEvent.VK_D) {
         GamePanel.player.addDirection(Direction.RIGHT);
       }
+      if(code == KeyEvent.VK_H && GamePanel.player.hasPotion()){
+        GamePanel.player.setHealth(-10);
+        GamePanel.player.removePotion();
+      }
+
       return null;
     };
 
@@ -168,6 +176,9 @@ public class Environment extends Scene {
               case 2:
                 entities.add(new Skeleton(new Position(col*ts, row*ts)));
                 break;
+              case 3:
+                entities.add(new Vampire(new Position(col*ts, row*ts)));
+                break;
               default:
                 //rien
           }
@@ -188,6 +199,12 @@ public class Environment extends Scene {
 
 
     entities.removeIf(entity1 -> entity1.getHealth() <= 0);
+    for (Entity entity : entities) {
+      if (entity instanceof Monster monster) {
+        monster.orientateToPlayer();
+        monster.moveInDirection();
+      }
+    }
 
 
     boolean doesCollide = false;
@@ -225,7 +242,13 @@ public class Environment extends Scene {
           if (entity instanceof Chest chest) {
             if (!chest.isOpen()) {
               chest.open();
-              player.addItemToInventory(new Sword());
+              Random r = new Random();
+              if(r.nextInt(2)==0){
+                player.addItemToInventory(new Sword());
+              }
+              else{
+                player.addItemToInventory(new heal_potion());
+              }
             }
           } else if (entity instanceof Monster monster) {
             Scene f = new FightScene(monster);
