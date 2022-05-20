@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable {
     player.update();
     currentEnvironment.update(player);
 
-    if(player.getHealth()==0){
+    if(player.getHealth() <= 0){
       Game_over End = new Game_over("/Musics/theme.wav");
       setScene(End);
     }
