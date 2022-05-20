@@ -62,14 +62,12 @@ public class FightScene extends Scene {
    *
    */
   private void opponentTurn() {
-    System.out.println("enemi attack");
-    GamePanel.player.setHealth(m_opp.getStrength());
+    if(m_opp.getHealth()>0) {
+      GamePanel.player.setHealth(m_opp.getStrength());
+    }
   }
 
   private void playerTurn() {
-    m_opp.setHealth(GamePanel.player.getStrength());
-    /*
-    m_menu = true;
     AtomicBoolean played = new AtomicBoolean(false);
     while(!played.get()) {
       GamePanel.keyH.onKeyPress = (Integer code) -> {
@@ -79,10 +77,12 @@ public class FightScene extends Scene {
         }
         if (code == KeyEvent.VK_Z) {
           escape();
-          played.set(true);
+          played.set(false);
         }
         return null;
       };
+      menu = false;
+   //
     }
         /*
         int action = selectAction();
@@ -108,6 +108,7 @@ public class FightScene extends Scene {
   }
 
   private void attack() {
+    m_opp.setHealth(GamePanel.player.getStrength());
   }
 
   /**
@@ -117,7 +118,7 @@ public class FightScene extends Scene {
   @Override
   public void update(Player player) {
 
-//      System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
+      System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
       // Check the fastest to act
       if (player.getSpeed() > m_opp.getSpeed()) {
         // Player turn
@@ -127,8 +128,10 @@ public class FightScene extends Scene {
           m_end = true;
         }
 
-        // Opponent turn
-        opponentTurn();
+        if(!m_end) {
+          // Opponent turn
+          opponentTurn();
+        }
         // Check if opponent kills player
         if (player.getHealth() < 0) {
           m_end = true;
@@ -141,8 +144,10 @@ public class FightScene extends Scene {
           m_end = true;
         }
 
-        // Player turn
-        playerTurn();
+        if(!m_end) {
+          // Player turn
+          playerTurn();
+        }
         // Check if player kills opponent
         if (m_opp.getHealth() < 0) {
           m_end = true;
@@ -171,10 +176,8 @@ public class FightScene extends Scene {
     g2.setColor(Color.GREEN);
     g2.fillRect(75, 400, 140, 200);
 
-    if(menu) {
-      g2.drawImage(attackButton, 400, 200, null);
-      g2.drawImage(escapeButton, 400, 200, null);
-    }
+    g2.drawImage(attackButton, 500, 375, null);
+    g2.drawImage(escapeButton, 495, 475, null);
 
   }
 }
