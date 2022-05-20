@@ -1,5 +1,6 @@
 package utils;
 
+import entity.Chest;
 import entity.Entity;
 import entity.Player;
 import main.GamePanel;
@@ -101,6 +102,10 @@ public class Environment extends Scene {
           row++;
         }
       }
+
+
+      entities.add(new Chest(new Position(GamePanel.tileSize * 4, GamePanel.tileSize * 2)));
+
       br.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -119,19 +124,16 @@ public class Environment extends Scene {
         if (isPlayerCollidingWithDrawable(tile)) {
           //        The player is on the portal
 
-          if(player.getPosition().getX() < 100){
+          if (player.getPosition().getX() < 100) {
             player.setPosition(new Position(GamePanel.screenWidth - 100, player.getPosition().getY()));
-          }
-          else if(player.getPosition().getX() > GamePanel.screenWidth - 100){
+          } else if (player.getPosition().getX() > GamePanel.screenWidth - 100) {
             player.setPosition(new Position(100, player.getPosition().getY()));
-          }
-          else if(player.getPosition().getY() < 100){
+          } else if (player.getPosition().getY() < 100) {
             player.setPosition(new Position(player.getPosition().getX(), GamePanel.screenHeight - 100));
-          }
-          else if(player.getPosition().getY() > GamePanel.screenHeight - 100){
+          } else if (player.getPosition().getY() > GamePanel.screenHeight - 100) {
             player.setPosition(new Position(player.getPosition().getX(), 100));
           }
-          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp() - 1);
           return;
 
 
@@ -139,6 +141,22 @@ public class Environment extends Scene {
 
       }
     }
+
+    for (Entity entity : entities) {
+      if (entity.isSolid()) {
+        if (willPlayerCollideWithDrawable(entity)) {
+          doesCollide = true;
+          if (entity instanceof Chest chest) {
+            if (!chest.isOpen()) {
+              chest.open();
+            }
+          }
+          break;
+        }
+      }
+    }
+
+
     if (!doesCollide) {
       player.move();
     }
