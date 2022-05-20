@@ -1,8 +1,6 @@
 package fight;
 
 import entity.Entity;
-import entity.Player;
-import main.FightPanel;
 import utils.Music;
 
 import javax.swing.*;

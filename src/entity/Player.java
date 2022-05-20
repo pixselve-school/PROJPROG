@@ -27,7 +27,7 @@ public class Player extends Entity {
   private final HashSet<Direction> directions;
 
   public Player() {
-    super(100, 100, 5);
+    super(100, 5, 10);
     this.nextPosition = this.getPosition();
     this.directions = new HashSet<>();
   }

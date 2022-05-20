@@ -2,34 +2,39 @@ package main;
 
 import entity.Entity;
 import entity.Player;
-import utils.Music;
 import utils.Scene;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
-public class FightPanel extends Scene {
+public class FightScene extends Scene {
   // Affichage du menu
   public boolean menu;
   // opponent
   Entity m_opp;
   // FightBackground
   private BufferedImage background;
+  private BufferedImage attackButton;
+  private BufferedImage escapeButton;
 
   private boolean m_end;
 
+  private boolean m_menu;
+
   // Constructeur de la classe
-  public FightPanel(Entity e) {
+  public FightScene(Entity e) {
     super("fight");
     m_opp = e;
 
     m_end = false;
+    m_menu = false;
 
-    playMusic();
+    //playMusic();
 
     System.out.println("START : Player Health : " + GamePanel.player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
 
@@ -37,23 +42,48 @@ public class FightPanel extends Scene {
     try {
       background = ImageIO.read(getClass().getResource("/Backgrounds/Fight_back.png"));
     } catch (IOException ex) {
-      System.out.println("Background load failed !");
+      System.out.println(ex);
     }
+    try {
+      attackButton = ImageIO.read(getClass().getResource("/Backgrounds/atack.png"));
+    }catch (IOException ex) {
+      System.out.println(ex);
+    }
+    try {
+      escapeButton = ImageIO.read(getClass().getResource("/Backgrounds/escape.png"));
+    }catch (IOException ex) {
+      System.out.println(ex);
+    }
+
     menu = false;
   }
-
-
-
 
   /**
    *
    */
   private void opponentTurn() {
+    System.out.println("enemi attack");
     GamePanel.player.setHealth(m_opp.getStrength());
   }
 
   private void playerTurn() {
     m_opp.setHealth(GamePanel.player.getStrength());
+    /*
+    m_menu = true;
+    AtomicBoolean played = new AtomicBoolean(false);
+    while(!played.get()) {
+      GamePanel.keyH.onKeyPress = (Integer code) -> {
+        if (code == KeyEvent.VK_A) {
+          attack();
+          played.set(true);
+        }
+        if (code == KeyEvent.VK_Z) {
+          escape();
+          played.set(true);
+        }
+        return null;
+      };
+    }
         /*
         int action = selectAction();
         if(action==1) {
@@ -93,36 +123,35 @@ public class FightPanel extends Scene {
         // Player turn
         playerTurn();
         // Check if player kills opponent
-        if (m_opp.getHealth() == 0) {
+        if (m_opp.getHealth() < 0) {
           m_end = true;
-//          break;
         }
 
         // Opponent turn
         opponentTurn();
         // Check if opponent kills player
-        if (player.getHealth() == 0) {
+        if (player.getHealth() < 0) {
           m_end = true;
-//          break;
         }
       } else {
         // Opponent turn
         opponentTurn();
         // Check if opponent kills player
-        if (player.getHealth() == 0) {
+        if (player.getHealth() < 0) {
           m_end = true;
-//          break;
         }
 
         // Player turn
         playerTurn();
         // Check if player kills opponent
-        if (m_opp.getHealth() == 0) {
+        if (m_opp.getHealth() < 0) {
           m_end = true;
-//          break;
         }
       }
 
+    if(m_end) {
+      GamePanel.revertScene();
+    }
     System.out.println("END : Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
   }
 
@@ -142,6 +171,10 @@ public class FightPanel extends Scene {
     g2.setColor(Color.GREEN);
     g2.fillRect(75, 400, 140, 200);
 
+    if(menu) {
+      g2.drawImage(attackButton, 400, 200, null);
+      g2.drawImage(escapeButton, 400, 200, null);
+    }
 
   }
 }

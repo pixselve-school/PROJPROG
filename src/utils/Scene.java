@@ -21,6 +21,12 @@ public abstract class Scene {
     }
   }
 
+  public void stopMusic(){
+    if(ambianceMusic!= null){
+      ambianceMusic.stop();
+    }
+  }
+
   public abstract void update(Player player);
 
   public abstract void draw(Graphics2D g2);
