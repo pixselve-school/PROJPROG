@@ -192,6 +192,12 @@ public class Environment extends Scene {
 
 
     entities.removeIf(entity1 -> entity1.getHealth() <= 0);
+    for (Entity entity : entities) {
+      if (entity instanceof Monster monster) {
+        monster.orientateToPlayer();
+        monster.moveInDirection();
+      }
+    }
 
 
     boolean doesCollide = false;
