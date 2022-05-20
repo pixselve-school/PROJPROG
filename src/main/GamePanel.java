@@ -3,6 +3,7 @@ package main;
 import entity.Direction;
 import entity.Player;
 import utils.Environment;
+import utils.Main_Menu;
 import utils.Scene;
 
 import javax.swing.*;
@@ -74,25 +75,34 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     GamePanel.keyH.onKeyPress = (Integer code) -> {
-      if (code == KeyEvent.VK_W) {
-        player.addDirection(Direction.UP);
-      }
-      if (code == KeyEvent.VK_S) {
-        player.addDirection(Direction.DOWN);
-      }
-      if (code == KeyEvent.VK_A) {
-        player.addDirection(Direction.LEFT);
-      }
-      if (code == KeyEvent.VK_D) {
-        player.addDirection(Direction.RIGHT);
-      }
-      if (code == KeyEvent.VK_F) {
-        if (currentEnvironment instanceof FightPanel) {
-          revertScene();
-        } else {
-          setScene(new FightPanel(new Player()));
-
+      if (currentEnvironment instanceof FightPanel) {
+        if (code == KeyEvent.VK_W) {
+          player.addDirection(Direction.UP);
         }
+        if (code == KeyEvent.VK_S) {
+          player.addDirection(Direction.DOWN);
+        }
+        if (code == KeyEvent.VK_A) {
+          player.addDirection(Direction.LEFT);
+        }
+        if (code == KeyEvent.VK_D) {
+          player.addDirection(Direction.RIGHT);
+        }
+        if (code == KeyEvent.VK_F) {
+          setScene(new FightPanel(new Player()));
+        }
+
+      }
+      else if (currentEnvironment instanceof FightPanel) {
+        if (code == KeyEvent.VK_F) {
+          revertScene();
+        }
+      }
+      else if (currentEnvironment instanceof Main_Menu){
+        if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE){
+          //lancer le jeu
+        }
+
       }
       return null;
     };
