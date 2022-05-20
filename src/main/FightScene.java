@@ -42,9 +42,6 @@ public class FightScene extends Scene {
 
     playMusic();
 
-    System.out.println("START : Player Health : " + GamePanel.player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
-
-
     try {
       background = ImageIO.read(getClass().getResource("/Backgrounds/Fight_back.png"));
     } catch (IOException ex) {
@@ -137,7 +134,6 @@ public class FightScene extends Scene {
   @Override
   public void update(Player player) {
 
-    System.out.println("Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
     // Check the fastest to act
       if (player.getSpeed() > m_opp.getSpeed()) {
         // Player turn
@@ -176,8 +172,7 @@ public class FightScene extends Scene {
     if(m_end) {
       GamePanel.revertScene();
     }
-    System.out.println("END : Player Health : " + player.getHealth() + " | Opponent Health : " + m_opp.getHealth());
-  }
+ }
 
   /**
    * Draw the scene
