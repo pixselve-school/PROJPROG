@@ -8,6 +8,7 @@ import entity.monsters.Monster;
 import entity.monsters.Skeleton;
 import entity.monsters.Vampire;
 import items.Sword;
+import items.heal_potion;
 import main.FightScene;
 import main.GamePanel;
 import tile.*;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Environment extends Scene {
   static int nbEnv = 0;
@@ -67,6 +69,11 @@ public class Environment extends Scene {
       if (code == KeyEvent.VK_D) {
         GamePanel.player.addDirection(Direction.RIGHT);
       }
+      if(code == KeyEvent.VK_H && GamePanel.player.hasPotion()){
+        GamePanel.player.setHealth(-10);
+        GamePanel.player.removePotion();
+      }
+
       return null;
     };
 
@@ -229,7 +236,13 @@ public class Environment extends Scene {
           if (entity instanceof Chest chest) {
             if (!chest.isOpen()) {
               chest.open();
-              player.addItemToInventory(new Sword());
+              Random r = new Random();
+              if(r.nextInt(2)==0){
+                player.addItemToInventory(new Sword());
+              }
+              else{
+                player.addItemToInventory(new heal_potion());
+              }
             }
           } else if (entity instanceof Monster monster) {
             Scene f = new FightScene(monster);

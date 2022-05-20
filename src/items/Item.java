@@ -10,6 +10,9 @@ public abstract class Item {
   public Item(int givenStrength) {
     this.givenStrength = givenStrength;
   }
+  public Item(){
+
+  }
 
   public int getGivenStrength() {
     return givenStrength;
