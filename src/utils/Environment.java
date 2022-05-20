@@ -56,48 +56,51 @@ public class Environment extends Scene {
       int col = 0;
       int row = 0;
       // Parcourir le fichier txt pour r�cup�rer les valeurs
-      while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+      while (col < GamePanel.maxScreenCol+2 && row < GamePanel.maxScreenRow+2) {
         String line = br.readLine();
-        while (col < GamePanel.maxScreenCol) {
+        while (col < GamePanel.maxScreenCol+2) {
           String[] numbers = line.split(" ");
           int num = Integer.parseInt(numbers[col]);
           int ts = GamePanel.tileSize;
           if (num < 0) {
-            if (col == 7) {
-              tiles.add(new Portal_left(-num, col * ts, row * ts));
-            } else if (col == 8) {
-              tiles.add(new Portal_right(-num, col * ts, row * ts));
-            } else if (row == 5) {
-              tiles.add(new Portal_sideUp(-num, col * ts, row * ts));
+            if (col == 8) {
+              tiles.add(new Portal_left(-num, (col-1) * ts, (row-1) * ts));
+            } else if (col == 9) {
+              tiles.add(new Portal_right(-num, (col-1) * ts, (row-1) * ts));
             } else if (row == 6) {
-              tiles.add(new Portal_sideDown(-num, col * ts, row * ts));
+              tiles.add(new Portal_sideUp(-num, (col-1) * ts, (row-1) * ts));
+            } else if (row == 7) {
+              tiles.add(new Portal_sideDown(-num, (col-1) * ts, (row-1) * ts));
             }
           } else {
             switch (num) {
               case 0:
-                tiles.add(new Ground(col * ts, row * ts));
+                tiles.add(new Ground((col-1) * ts, (row-1) * ts));
                 break;
               case 1:
-                if (col == 0) {
-                  tiles.add(new Wall_left(col * ts, row * ts));
-                } else if (col == GamePanel.maxScreenCol - 1) {
-                  tiles.add(new Wall_right(col * ts, row * ts));
-                } else if (row == 0) {
-                  tiles.add(new Wall_back(col * ts, row * ts));
-                } else if (row == GamePanel.maxScreenRow - 1) {
-                  tiles.add(new Wall_front(col * ts, row * ts));
+                if (col == 1) {
+                  tiles.add(new Wall_left((col-1) * ts, (row-1) * ts));
+                } else if (col == GamePanel.maxScreenCol) {
+                  tiles.add(new Wall_right((col-1) * ts, (row-1) * ts));
+                } else if (row == 1) {
+                  tiles.add(new Wall_back((col-1) * ts, (row-1) * ts));
+                } else if (row == GamePanel.maxScreenRow) {
+                  tiles.add(new Wall_front((col-1) * ts, (row-1) * ts));
+                }
+                else{ // murs en dehors de la map pour empècher d'en sortir
+                    tiles.add(new Wall_front((col-1) * ts, (row-1) * ts));
                 }
                 break;
               case 2:
-                tiles.add(new Liquid(col * ts, row * ts));
+                tiles.add(new Liquid((col-1) * ts, (row-1) * ts));
                 break;
               default:
-                tiles.add(new Ground(col * ts, row * ts));
+                tiles.add(new Ground((col-1) * ts, (row-1) * ts));
             }
           }
           col++;
         }
-        if (col == GamePanel.maxScreenCol) {
+        if (col == GamePanel.maxScreenCol+2) {
           col = 0;
           row++;
         }
