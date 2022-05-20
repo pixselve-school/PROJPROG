@@ -2,6 +2,7 @@ package utils;
 
 import entity.Entity;
 import entity.Player;
+import entity.TmpMob;
 import main.GamePanel;
 import tile.*;
 
@@ -101,6 +102,30 @@ public class Environment extends Scene {
           row++;
         }
       }
+      br.readLine(); // on saute la ligne vide
+      col = 0;
+      row = 0;
+      // Parcourir le fichier txt pour r�cup�rer les valeurs
+      while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+        String line = br.readLine();
+        while (col < GamePanel.maxScreenCol) {
+          String[] numbers = line.split(" ");
+          int num = Integer.parseInt(numbers[col]);
+          int ts = GamePanel.tileSize;
+          switch (num) {
+              case 1:
+                entities.add(new TmpMob(1, 1, 1));
+                break;
+              default:
+                //rien
+          }
+          col++;
+        }
+        if (col == GamePanel.maxScreenCol) {
+          col = 0;
+          row++;
+        }
+      }
       br.close();
     } catch (IOException e) {
       e.printStackTrace();
@@ -133,8 +158,6 @@ public class Environment extends Scene {
           }
           GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
           return;
-
-
         }
 
       }
