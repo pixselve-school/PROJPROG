@@ -30,6 +30,6 @@ public class Game_over extends Scene {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(image, GamePanel.screenWidth/2, GamePanel.screenHeight/2, GamePanel.tileSize, GamePanel.tileSize, null);
+        g2.drawImage(image, 0, 0, GamePanel.screenWidth, GamePanel.screenHeight, null);
     }
 }
