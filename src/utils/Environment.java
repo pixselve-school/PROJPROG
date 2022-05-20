@@ -1,8 +1,13 @@
 package utils;
 
+import entity.Chest;
 import entity.Entity;
 import entity.Player;
 import entity.TmpMob;
+import entity.monsters.Monster;
+import entity.monsters.Skeleton;
+import items.Sword;
+
 import main.GamePanel;
 import tile.*;
 
@@ -158,12 +163,33 @@ public class Environment extends Scene {
           else if(player.getPosition().getY() > GamePanel.screenHeight - (int)(GamePanel.tileSize*2.2)){
             player.setPosition(new Position(player.getPosition().getX(), (int)(GamePanel.tileSize*1.2)));
           }
-          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp()-1);
+          GamePanel.currentEnvironment = GamePanel.environments.get(((Portal) tile).getTp() - 1);
           return;
         }
 
       }
     }
+
+    for (Entity entity : entities) {
+      if (entity.isSolid()) {
+        if (willPlayerCollideWithDrawable(entity)) {
+          doesCollide = true;
+          if (entity instanceof Chest chest) {
+            if (!chest.isOpen()) {
+              chest.open();
+              player.addItemToInventory(new Sword());
+            }
+          } else if (entity instanceof Monster monster) {
+            // TODO: faire quelque chose avec monster
+          }
+          break;
+        }
+      }
+    }
+
+
+    entities.add(new Skeleton(new Position(150, 300)));
+
     if (!doesCollide) {
       player.move();
     }
