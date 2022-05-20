@@ -186,10 +186,6 @@ public class Environment extends Scene {
         }
       }
     }
-
-
-    entities.add(new Skeleton(new Position(150, 300)));
-
     if (!doesCollide) {
       player.move();
     }

@@ -98,11 +98,11 @@ public class GamePanel extends JPanel implements Runnable {
           player.addDirection(Direction.RIGHT);
         }
         if (code == KeyEvent.VK_F) {
-          setScene(new FightPanel(new TmpMob(10, 1, 5)));
+          setScene(new FightScene(new TmpMob(10, 1, 5)));
         }
 
       }
-      else if (currentEnvironment instanceof FightPanel) {
+      else if (currentEnvironment instanceof FightScene) {
         if (code == KeyEvent.VK_F) {
           revertScene();
         }
