@@ -22,7 +22,7 @@ public class Vampire extends Monster {
   }
 
   public Vampire(Position position) {
-    super(position, 5, 4, 4, (int) (GamePanel.tileSize * 1.5), (int) (GamePanel.tileSize * 1.5));
+    super(position, 7, 4, 7, (int) (GamePanel.tileSize * 1.5), (int) (GamePanel.tileSize * 1.5));
   }
 
 
