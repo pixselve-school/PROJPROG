@@ -185,6 +185,11 @@ public class Environment extends Scene {
   }
 
   public void update(Player player) {
+
+
+    entities.removeIf(entity1 -> entity1.getHealth() <= 0);
+
+
     boolean doesCollide = false;
     for (Tile tile : tiles) {
       if (tile.isSolid()) {
