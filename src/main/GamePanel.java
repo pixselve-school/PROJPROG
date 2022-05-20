@@ -172,8 +172,8 @@ public class GamePanel extends JPanel implements Runnable {
     if ((currentEnvironment instanceof Environment)) {
 //      Do not draw the player when in fight mode
       player.draw(g2);
+      HUD.draw(g2);
     }
-    HUD.draw(g2);
     g2.dispose();
   }
 
