@@ -6,8 +6,10 @@ import entity.Player;
 import entity.TmpMob;
 import entity.monsters.Monster;
 import entity.monsters.Skeleton;
+import fight.Fight;
 import items.Sword;
 
+import main.FightScene;
 import main.GamePanel;
 import tile.*;
 
@@ -186,7 +188,8 @@ public class Environment extends Scene {
               player.addItemToInventory(new Sword());
             }
           } else if (entity instanceof Monster monster) {
-            // TODO: faire quelque chose avec monster
+            Scene f = new FightScene(monster);
+            GamePanel.currentEnvironment=f;
           }
           break;
         }
