@@ -19,7 +19,7 @@ public class Player extends Entity {
 
   static {
     try {
-      image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/player/superhero.png")));
+      image = ImageIO.read(Objects.requireNonNull(Player.class.getResource("/player/Character.png")));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

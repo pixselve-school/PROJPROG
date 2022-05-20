@@ -88,12 +88,18 @@ public class Environment extends Scene {
                 } else if (col == GamePanel.maxScreenCol) {
                   tiles.add(new Wall_right((col-1) * ts, (row-1) * ts));
                 } else if (row == 1) {
-                  tiles.add(new Wall_back((col-1) * ts, (row-1) * ts));
+                  if(col == 3 || col == 14){
+                    tiles.add(new Wall_back(false,(col-1) * ts, (row-1) * ts));
+                  }
+                  else{
+                    tiles.add(new Wall_back(true,(col-1) * ts, (row-1) * ts));
+                  }
                 } else if (row == GamePanel.maxScreenRow) {
                   tiles.add(new Wall_front((col-1) * ts, (row-1) * ts));
                 }
                 else{ // murs en dehors de la map pour empècher d'en sortir
                     tiles.add(new Wall_front((col-1) * ts, (row-1) * ts));
+
                 }
                 break;
               case 2:
