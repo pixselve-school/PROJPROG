@@ -1,6 +1,7 @@
 package entity;
 
 import items.Item;
+import items.heal_potion;
 import main.GamePanel;
 import utils.Drawable;
 import utils.Position;
@@ -139,4 +140,24 @@ public class Player extends Entity {
     setPosition(nextPosition);
     this.nextPosition = getPosition();
   }
+
+  public boolean hasPotion(){
+    for(Item item : inventory){
+      if (item instanceof heal_potion){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void removePotion(){
+    int i = 0;
+    for(Item item : inventory){
+      if (item instanceof heal_potion){
+        inventory.remove(i);
+      }
+      i++;
+    }
+  }
+
 }
