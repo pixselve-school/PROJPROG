@@ -223,7 +223,7 @@ public class FightScene extends Scene {
     final int HEIGHT = (int) (WIDTH * 1.7);
 
     final int START_X = 440;
-    final int START_Y = 225;
+    final int START_Y = 190;
 
     for (int i = 0; i < m_opp.getHealth(); i++) {
       if (i % 2 == 0) {
