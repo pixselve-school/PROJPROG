@@ -189,6 +189,7 @@ public class FightScene extends Scene {
     g2.drawImage(background, 0, 0, null);
 
     drawHealth(g2);
+    drawOpponentHealth(g2);
 
     // draw opponent
     m_opp.draw(g2, new Position(440, 225), m_opp.getWidth(), m_opp.getHeight());
@@ -201,15 +202,30 @@ public class FightScene extends Scene {
 
   }
 
-  private static void drawHealth(Graphics2D g2, Entity entity) {
+  private void drawHealth(Graphics2D g2) {
+    final int WIDTH = 15;
+    final int HEIGHT = (int) (WIDTH * 1.7);
+
+    final int START_X = GamePanel.player.getPosition().getX();
+    final int START_Y = GamePanel.player.getPosition().getX();
+
+    for (int i = 0; i < GamePanel.player.getHealth(); i++) {
+      if (i % 2 == 0) {
+        g2.drawImage(left_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
+      } else {
+        g2.drawImage(right_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
+      }
+    }
+  }
+
+  private void drawOpponentHealth(Graphics2D g2) {
     final int WIDTH = 15;
     final int HEIGHT = (int) (WIDTH * 1.7);
 
     final int START_X = 5;
     final int START_Y = 5;
 
-
-    for (int i = 0; i < entity.getHealth(); i++) {
+    for (int i = 0; i < m_opp.getHealth(); i++) {
       if (i % 2 == 0) {
         g2.drawImage(left_heart, START_X + i * WIDTH, START_Y, WIDTH, HEIGHT, null);
       } else {
