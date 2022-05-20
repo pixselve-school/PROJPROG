@@ -76,12 +76,6 @@ public class GamePanel extends JPanel implements Runnable {
     double drawInterval = 1000000000 / FPS; // rafraichissement chaque 0.0166666 secondes
     double nextDrawTime = System.nanoTime() + drawInterval;
 
-    if(player.getHealth()==0){
-      oldScene = currentEnvironment;
-      Game_over End = new Game_over("/Musics/theme.wav");
-      currentEnvironment = End;
-    }
-
     while (gameThread != null) { //Tant que le thread du jeu est actif
 
 
@@ -114,6 +108,11 @@ public class GamePanel extends JPanel implements Runnable {
   public void update() {
     player.update();
     currentEnvironment.update(player);
+
+    if(player.getHealth()==0){
+      Game_over End = new Game_over("/Musics/theme.wav");
+      setScene(End);
+    }
   }
 
   public void paintComponent(Graphics g) {
