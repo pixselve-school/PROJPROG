@@ -47,12 +47,17 @@ public class Chest extends Entity {
 
   @Override
   public void draw(Graphics2D g2) {
-    g2.drawImage(isOpen ? openedImage : closedImage, this.getPosition().getX(), this.getPosition().getY(), (int) (GamePanel.tileSize * 0.7), (int) (GamePanel.tileSize * 0.7), null);
+    draw(g2, getPosition(), getWidth(), getHeight());
+  }
+
+  @Override
+  public void draw(Graphics2D graphics2D, Position position, int width, int height) {
+    graphics2D.drawImage(isOpen ? openedImage : closedImage, position.getX(), position.getY(), width, height, null);
     if (GamePanel.DEBUG) {
       if (isSolid()) {
-        drawBoundings(g2, Color.RED);
+        drawBoundings(graphics2D, Color.RED);
       } else {
-        drawBoundings(g2, Color.GREEN);
+        drawBoundings(graphics2D, Color.GREEN);
       }
 
     }

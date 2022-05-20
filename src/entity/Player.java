@@ -88,10 +88,15 @@ public class Player extends Entity {
 
 
   public void draw(Graphics2D g2) {
+    draw(g2, getPosition(), GamePanel.tileSize, GamePanel.tileSize);
+  }
+
+  @Override
+  public void draw(Graphics2D graphics2D, Position position, int width, int height) {
     // affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-    g2.drawImage(image, getPosition().getX(), getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+    graphics2D.drawImage(image, position.getX(), position.getY(), width, height, null);
     if (GamePanel.DEBUG) {
-      drawBoundings(g2, Color.BLUE);
+      drawBoundings(graphics2D, Color.BLUE);
     }
   }
 

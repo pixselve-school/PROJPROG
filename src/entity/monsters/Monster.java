@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Monster extends Entity {
+  @Override
+  public void draw(Graphics2D graphics2D, Position position, int width, int height) {
+    graphics2D.drawImage(getImage(), position.getX(), position.getY(), width, height, null);
+  }
+
   public Monster(Position position, int health, int strength, int speed, int width, int height) {
     super(position, health, strength, speed, width, height);
   }
@@ -15,7 +20,7 @@ public abstract class Monster extends Entity {
 
   @Override
   public void draw(Graphics2D g2) {
-    g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), getWidth(), getHeight(), null);
+    draw(g2, this.getPosition(), getWidth(), getHeight());
 
   }
 }

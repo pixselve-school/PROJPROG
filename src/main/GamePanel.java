@@ -2,10 +2,7 @@ package main;
 
 import HUD.HUD;
 import entity.Player;
-import utils.Environment;
-import utils.Game_over;
-import utils.Main_Menu;
-import utils.Scene;
+import utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,9 +106,14 @@ public class GamePanel extends JPanel implements Runnable {
     player.update();
     currentEnvironment.update(player);
 
-    if(player.getHealth() <= 0){
-      Game_over End = new Game_over("/Musics/theme.wav");
+    if (player.getHealth() <= 0) {
+      Game_over End = new Game_over("theme");
       setScene(End);
+    }
+
+    if (environments.stream().allMatch(Environment::isCompleted)) {
+      Win_Menu win_menu = new Win_Menu("theme");
+      setScene(win_menu);
     }
   }
 

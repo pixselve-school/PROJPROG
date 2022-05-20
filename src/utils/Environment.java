@@ -244,4 +244,8 @@ public class Environment extends Scene {
     tiles.forEach(tile -> tile.draw(g2));
     entities.forEach(tile -> tile.draw(g2));
   }
+
+  public boolean isCompleted() {
+    return entities.stream().noneMatch(entity -> entity instanceof Monster);
+  }
 }

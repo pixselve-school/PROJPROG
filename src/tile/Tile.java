@@ -2,6 +2,7 @@ package tile;
 
 import main.GamePanel;
 import utils.Drawable;
+import utils.Position;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,12 +16,17 @@ public abstract class Tile extends Drawable {
 
   @Override
   public void draw(Graphics2D g2) {
-    g2.drawImage(getImage(), this.getPosition().getX(), this.getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+    draw(g2, this.getPosition(), GamePanel.tileSize, GamePanel.tileSize);
+  }
+
+  @Override
+  public void draw(Graphics2D graphics2D, Position position, int width, int height) {
+    graphics2D.drawImage(getImage(), position.getX(), position.getY(), width, height, null);
     if (GamePanel.DEBUG) {
       if (isSolid()) {
-        drawBoundings(g2, Color.RED);
+        drawBoundings(graphics2D, Color.RED);
       } else {
-        drawBoundings(g2, Color.GREEN);
+        drawBoundings(graphics2D, Color.GREEN);
       }
 
     }
